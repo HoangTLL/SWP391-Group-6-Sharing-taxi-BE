@@ -1,0 +1,14 @@
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.deps.json
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.runtimeconfig.json
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.dll
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.pdb
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.AssemblyInfo.cs
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.dll
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\refint\STP.Repository.dll
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.pdb
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.genruntimeconfig.cache
+C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\ref\STP.Repository.dll
