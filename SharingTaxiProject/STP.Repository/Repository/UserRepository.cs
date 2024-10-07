@@ -32,5 +32,9 @@ namespace STP.Repository.Repository
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
+        public async Task<int> GetLatestIdAsync()
+        {
+            return await _context.Users.MaxAsync(u => u.Id);
+        }
     }
 }
