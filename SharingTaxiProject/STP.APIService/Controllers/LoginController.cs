@@ -36,7 +36,7 @@ namespace STP.APIService.Controllers
             }
 
             // Nếu thành công, trả về thông báo và ID người dùng
-            return Ok(new { message = "Login successful", userId = user.Id });
+            return Ok(new { message = "Login successful", userId = user.Id, role = user.Role });
         }
     }
 
