@@ -26,7 +26,13 @@ namespace STP.API.Controllers
 
             var existingUser = await _userRepository.GetByEmailAsync(userSignUpDto.Email);
             if (existingUser != null)
-                return BadRequest(new { message = "Email is already registered." });
+            {
+                return BadRequest(new
+                {
+                    message = "Email is already registered.",
+
+                });
+            }
 
             var utcPlus7 = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time"));
 
@@ -38,7 +44,7 @@ namespace STP.API.Controllers
                 // Create new user with incremented ID
                 var newUser = new User
                 {
-                    Id = latestId + 1,
+                    Id = latestId + 1, // Increment the latest ID
                     Email = userSignUpDto.Email,
                     Password = userSignUpDto.Password,
                     CreatedAt = utcPlus7,
@@ -53,19 +59,26 @@ namespace STP.API.Controllers
                     userId = newUser.Id // Return the newly created user ID
                 });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // Log the exception (not shown here)
                 return StatusCode(500, new { message = "An error occurred while processing your request." });
             }
         }
-
-        // PUT: api/User/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserDto updateUserDto)
         {
             if (updateUserDto == null)
                 return BadRequest("User data is null.");
+
+            var existingUser = await _userRepository.GetByEmailAsync(updateUserDto.Email);
+            if (existingUser != null)
+            {
+                return BadRequest(new
+                {
+                    message = "Email is already registered.",
+                });
+            }
 
             var user = await _userRepository.GetByIdAsync(id);
             if (user == null)
@@ -81,7 +94,7 @@ namespace STP.API.Controllers
             try
             {
                 await _userRepository.UpdateAsync(user);
-                return NoContent(); // Return 204 No Content on successful update
+                return Ok(new { message = "User updated successfully." }); // Return success message
             }
             catch (Exception)
             {
