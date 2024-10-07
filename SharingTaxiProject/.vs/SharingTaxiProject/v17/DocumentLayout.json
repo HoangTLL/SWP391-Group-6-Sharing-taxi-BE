@@ -1,26 +1,38 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\",
+  "WorkspaceRootPath": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|c:\\users\\admin\\source\\repos\\sharingtaxiproject\\stp.repository\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|solutionrelative:stp.repository\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|c:\\users\\phucn\\source\\repos\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.repository\\models\\sharetaxicontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|solutionrelative:stp.repository\\models\\sharetaxicontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|c:\\users\\admin\\source\\repos\\sharingtaxiproject\\stp.apiservice\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|c:\\users\\phucn\\source\\repos\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\locationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\locationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|c:\\users\\admin\\source\\repos\\sharingtaxiproject\\stp.repository\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|c:\\users\\phucn\\source\\repos\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.repository\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|solutionrelative:stp.repository\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|c:\\users\\admin\\source\\repos\\sharingtaxiproject\\stp.repository\\repository\\arearepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|c:\\users\\phucn\\source\\repos\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.repository\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|solutionrelative:stp.repository\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|c:\\users\\phucn\\source\\repos\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.repository\\repository\\arearepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|solutionrelative:stp.repository\\repository\\arearepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|c:\\users\\admin\\source\\repos\\sharingtaxiproject\\stp.repository\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|c:\\users\\phucn\\source\\repos\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.repository\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|solutionrelative:stp.repository\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|c:\\users\\phucn\\source\\repos\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|c:\\users\\phucn\\source\\repos\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\stp.apiservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\stp.apiservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,17 +42,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ShareTaxiContext.cs",
+              "DocumentMoniker": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Models\\ShareTaxiContext.cs",
+              "RelativeDocumentMoniker": "STP.Repository\\Models\\ShareTaxiContext.cs",
+              "ToolTip": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Models\\ShareTaxiContext.cs",
+              "RelativeToolTip": "STP.Repository\\Models\\ShareTaxiContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T09:49:51.022Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "LocationController.cs",
+              "DocumentMoniker": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\LocationController.cs",
+              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\LocationController.cs",
+              "ToolTip": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\LocationController.cs",
+              "RelativeToolTip": "STP.APIService\\Controllers\\LocationController.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAqwE0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T09:43:59.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "STP.APIService",
+              "DocumentMoniker": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
+              "RelativeDocumentMoniker": "STP.APIService\\STP.APIService.csproj",
+              "ToolTip": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
+              "RelativeToolTip": "STP.APIService\\STP.APIService.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-10-05T09:22:26.222Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "LoginController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.APIService\\Controllers\\LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "STP.APIService\\Controllers\\LoginController.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.APIService\\Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\LoginController.cs",
               "RelativeToolTip": "STP.APIService\\Controllers\\LoginController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAQwDQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-28T08:43:51.507Z",
               "EditorCaption": ""
@@ -49,50 +100,50 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "UnitOfWork.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.Repository\\UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\UnitOfWork.cs",
               "RelativeDocumentMoniker": "STP.Repository\\UnitOfWork.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.Repository\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\UnitOfWork.cs",
               "RelativeToolTip": "STP.Repository\\UnitOfWork.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAkwAwAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAADgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-28T08:41:24.86Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.Repository\\Repository\\UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Repository\\UserRepository.cs",
               "RelativeDocumentMoniker": "STP.Repository\\Repository\\UserRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.Repository\\Repository\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Repository\\UserRepository.cs",
               "RelativeToolTip": "STP.Repository\\Repository\\UserRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-28T08:42:26.65Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "AreaRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.Repository\\Repository\\AreaRepository.cs",
+              "DocumentMoniker": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Repository\\AreaRepository.cs",
               "RelativeDocumentMoniker": "STP.Repository\\Repository\\AreaRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.Repository\\Repository\\AreaRepository.cs",
+              "ToolTip": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Repository\\AreaRepository.cs",
               "RelativeToolTip": "STP.Repository\\Repository\\AreaRepository.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAswCEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAYwCQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-28T08:37:54.714Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.Repository\\Models\\User.cs",
+              "DocumentMoniker": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Models\\User.cs",
               "RelativeDocumentMoniker": "STP.Repository\\Models\\User.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.Repository\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\phucn\\source\\repos\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Models\\User.cs",
               "RelativeToolTip": "STP.Repository\\Models\\User.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAwBsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAA6wBsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-28T08:37:17.972Z",
               "EditorCaption": ""

@@ -17,9 +17,6 @@ public partial class Location
 
     public virtual Area? Area { get; set; }
 
-    public virtual ICollection<Pricing> PricingDropOffLocations { get; set; } = new List<Pricing>();
-
-    public virtual ICollection<Pricing> PricingPickUpLocations { get; set; } = new List<Pricing>();
 
     public virtual ICollection<Trip> TripDropOffLocations { get; set; } = new List<Trip>();
 
