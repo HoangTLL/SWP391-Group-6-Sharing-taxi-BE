@@ -2,6 +2,7 @@
 using STP.Repository.Models;
 using STP.Repository.Repository;
 using STP.Repository;
+using System.Threading.Tasks;
 
 namespace STP.API.Controllers
 {
@@ -20,11 +21,12 @@ namespace STP.API.Controllers
         [HttpPost("SignUp")]
         public async Task<IActionResult> SignUp([FromBody] UserSignUpDto userSignUpDto)
         {
+            if (userSignUpDto == null)
+                return BadRequest("User data is null.");
+
             var existingUser = await _userRepository.GetByEmailAsync(userSignUpDto.Email);
             if (existingUser != null)
-            {
                 return BadRequest(new { message = "Email is already registered." });
-            }
 
             var utcPlus7 = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time"));
 
@@ -36,7 +38,7 @@ namespace STP.API.Controllers
                 // Create new user with incremented ID
                 var newUser = new User
                 {
-                    Id = latestId + 1, // Increment the latest ID
+                    Id = latestId + 1,
                     Email = userSignUpDto.Email,
                     Password = userSignUpDto.Password,
                     CreatedAt = utcPlus7,
@@ -51,18 +53,55 @@ namespace STP.API.Controllers
                     userId = newUser.Id // Return the newly created user ID
                 });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Log the exception (not shown here)
                 return StatusCode(500, new { message = "An error occurred while processing your request." });
             }
         }
 
+        // PUT: api/User/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserDto updateUserDto)
+        {
+            if (updateUserDto == null)
+                return BadRequest("User data is null.");
+
+            var user = await _userRepository.GetByIdAsync(id);
+            if (user == null)
+                return NotFound("User not found.");
+
+            // Update user properties
+            user.Name = updateUserDto.Name;
+            user.Email = updateUserDto.Email;
+            user.PhoneNumber = updateUserDto.PhoneNumber;
+            user.Password = updateUserDto.Password; // Remember to hash passwords in production
+            user.DateOfBirth = updateUserDto.DateOfBirth;
+
+            try
+            {
+                await _userRepository.UpdateAsync(user);
+                return NoContent(); // Return 204 No Content on successful update
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
+        }
     }
 
     public class UserSignUpDto
     {
         public string Email { get; set; }
         public string Password { get; set; }
+    }
+
+    public class UpdateUserDto
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Password { get; set; }
+        public DateOnly? DateOfBirth { get; set; }
     }
 }
