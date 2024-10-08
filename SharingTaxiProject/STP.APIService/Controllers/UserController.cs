@@ -101,6 +101,48 @@ namespace STP.API.Controllers
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
+        // GET: api/UserList
+        [HttpGet]
+        public async Task<IActionResult> GetUsers()
+        {
+            try
+            {
+                // Fetch all users asynchronously
+                var users = await _userRepository.GetAllAsync();
+
+                // Select only the necessary fields
+                var userDtos = users.Select(u => new UserDto
+                {
+                    Id = u.Id,
+                    Name = u.Name,
+                    Email = u.Email,
+                    PhoneNumber = u.PhoneNumber,
+                    DateOfBirth = u.DateOfBirth,
+                    CreatedAt = u.CreatedAt,
+                    Role = u.Role
+                }).ToList();
+
+                // Return the list of user DTOs
+                return Ok(userDtos);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (not shown here)
+                return StatusCode(500, "An error occurred while fetching the users.");
+            }
+        }
+
+    }
+
+    public class UserDto
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public string? Email { get; set; }
+        public string? PhoneNumber { get; set; }
+        public DateOnly? DateOfBirth { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public string? Role { get; set; }
     }
 
     public class UserSignUpDto
