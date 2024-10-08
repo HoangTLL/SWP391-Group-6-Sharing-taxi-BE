@@ -65,7 +65,7 @@ namespace STP.API.Controllers
                 return StatusCode(500, new { message = "An error occurred while processing your request." });
             }
         }
-        [HttpPut("{id}")]
+        [HttpPut("UpdateUser{id}")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserDto updateUserDto)
         {
             if (updateUserDto == null)
@@ -101,8 +101,53 @@ namespace STP.API.Controllers
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
+        // PUT: api/User/UpdateUserAdmin/{id}
+        [HttpPut("UpdateUserAdmin/{id}")]
+        public async Task<IActionResult> UpdateUserAdmin(int id, [FromBody] UpdateUserDtoForAdmin updateUserDto)
+        {
+            if (updateUserDto == null)
+                return BadRequest("User data is null.");
+
+            var existingUser = await _userRepository.GetByIdAsync(id);
+            if (existingUser == null)
+                return NotFound("User not found.");
+
+            // Check if the new email is already in use
+            var emailCheck = await _userRepository.GetByEmailAsync(updateUserDto.Email);
+            if (emailCheck != null && emailCheck.Id != existingUser.Id)
+            {
+                return BadRequest(new
+                {
+                    message = "Email is already registered."
+                });
+            }
+
+            // Create a new user with updated details
+            var user = await _userRepository.GetByIdAsync(id);
+            if (user == null)
+                return NotFound("User not found.");
+
+            // Update user properties
+            user.Name = updateUserDto.Name;
+            user.Email = updateUserDto.Email;
+            user.PhoneNumber = updateUserDto.PhoneNumber;
+            user.Password = updateUserDto.Password; // Remember to hash passwords in production
+            user.DateOfBirth = updateUserDto.DateOfBirth;
+            user.Role = updateUserDto.Role;
+            try
+            {
+                await _userRepository.UpdateAsync(user);
+                return Ok(new { message = "User updated successfully." }); // Return success message
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
+        }
+
+
         // GET: api/UserList
-        [HttpGet]
+        [HttpGet("User List")]
         public async Task<IActionResult> GetUsers()
         {
             try
@@ -117,6 +162,7 @@ namespace STP.API.Controllers
                     Name = u.Name,
                     Email = u.Email,
                     PhoneNumber = u.PhoneNumber,
+                    Password = u.Password,
                     DateOfBirth = u.DateOfBirth,
                     CreatedAt = u.CreatedAt,
                     Role = u.Role
@@ -140,6 +186,7 @@ namespace STP.API.Controllers
         public string? Name { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
+        public string? Password { get; set; }
         public DateOnly? DateOfBirth { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string? Role { get; set; }
@@ -158,5 +205,14 @@ namespace STP.API.Controllers
         public string PhoneNumber { get; set; }
         public string Password { get; set; }
         public DateOnly? DateOfBirth { get; set; }
+    }
+    public class UpdateUserDtoForAdmin
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Password { get; set; } // Remember to hash passwords in production
+        public DateOnly? DateOfBirth { get; set; }
+        public string Role { get; set; } // New field for updating user role
     }
 }
