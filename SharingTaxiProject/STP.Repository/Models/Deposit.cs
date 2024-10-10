@@ -8,6 +8,7 @@ public partial class Deposit
     public int Id { get; set; }
 
     public int? WalletId { get; set; }
+    public int UserId { get; set; }
 
     public int? TransactionId { get; set; }
 

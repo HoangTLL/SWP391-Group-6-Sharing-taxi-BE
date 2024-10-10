@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< Updated upstream
     "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj": {}
   },
   "projects": {
@@ -12,6 +13,19 @@
         "projectPath": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.Repository\\obj\\",
+=======
+    "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj": {}
+  },
+  "projects": {
+    "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj",
+        "projectName": "STP.Repository",
+        "projectPath": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj",
+        "packagesPath": "C:\\Users\\phucn\\.nuget\\packages\\",
+        "outputPath": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\obj\\",
+>>>>>>> Stashed changes
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
