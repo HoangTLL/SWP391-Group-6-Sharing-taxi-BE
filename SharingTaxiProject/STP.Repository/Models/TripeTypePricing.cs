@@ -5,15 +5,21 @@ using System.Collections.Generic;
 
 namespace STP.Repository.Models;
 
-public partial class Area
+public partial class TripeTypePricing
 {
     public int Id { get; set; }
 
     public string Name { get; set; }
 
-    public string Description { get; set; }
+    public int TripType { get; set; }
+
+    public int MinPerson { get; set; }
+
+    public int MaxPerson { get; set; }
+
+    public decimal PricePerPerson { get; set; }
 
     public int? Status { get; set; }
 
-    public virtual ICollection<Location> Locations { get; set; } = new List<Location>();
+    public virtual TripType TripTypeNavigation { get; set; }
 }
