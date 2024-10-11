@@ -14,6 +14,7 @@ namespace STP.Repository
         private LocationRepository _locationRepository;
         private TripRepository _tripRepository;
         private TripTypeRepository _tripTypeRepository;
+        private BookingRepository _bookingRepository;
 
         // Constructor không tham số: khởi tạo DbContext (ShareTaxiContext)
         public UnitOfWork() => _context = new ShareTaxiContext();
@@ -59,6 +60,11 @@ namespace STP.Repository
         public TripTypeRepository TripTypeRepository
         {
             get { return _tripTypeRepository ??= new TripTypeRepository(_context); }
+        }
+
+        public BookingRepository BookingRepository
+        {
+            get { return _bookingRepository ??= new BookingRepository(_context); }
         }
         // Phương thức lưu thay đổi vào cơ sở dữ liệu
         public async Task<int> SaveAsync()
