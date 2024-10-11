@@ -54,6 +54,7 @@ namespace STP.API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTripById(int id)
         {
@@ -126,6 +127,7 @@ namespace STP.API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
         [HttpPatch("updateStatus/{id}")]
         public async Task<IActionResult> UpdateTripStatus(int id, [FromBody] UpdateTripStatusRequest request)
         {
@@ -162,6 +164,7 @@ namespace STP.API.Controllers
             [Required]
             public int NewStatus { get; set; }
         }
+
         private async Task<(Location pickUp, Location dropOff)> GetLocations(int pickUpId, int dropOffId)
         {
             var pickUpLocation = await _unitOfWork.LocationRepository.GetByIdAsync(pickUpId);
@@ -205,7 +208,7 @@ namespace STP.API.Controllers
         public int DropOffLocationId { get; set; }
         public int MaxPerson { get; set; }
         public int MinPerson { get; set; }
-        public DateTime BookingDate { get; set; }
+        public DateOnly BookingDate { get; set; }
         public TimeOnly HourInDay { get; set; }
     }
 }

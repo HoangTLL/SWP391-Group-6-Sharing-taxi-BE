@@ -42,18 +42,19 @@ namespace STP.Repository
         }
 
         // Get trips by date range
-        public async Task<List<Trip>> GetTripsByDateRangeAsync(DateTime startDate, DateTime endDate)
+        public async Task<List<Trip>> GetTripsByDateRangeAsync(DateOnly startDate, DateOnly endDate)
         {
             return await _context.Trips
                 .Where(t => t.BookingDate >= startDate && t.BookingDate <= endDate)
                 .ToListAsync();
         }
 
-        // Get available trips (trips with available seats)
+        // Updated method to handle DateOnly
         public async Task<List<Trip>> GetAvailableTripsAsync()
         {
+            var today = DateOnly.FromDateTime(DateTime.Now);
             return await _context.Trips
-                .Where(t => t.BookingDate > DateTime.Now && t.MaxPerson > t.Bookings.Count)
+                .Where(t => t.BookingDate > today && t.MaxPerson > t.Bookings.Count)
                 .Include(t => t.PickUpLocation)
                 .Include(t => t.DropOffLocation)
                 .ToListAsync();

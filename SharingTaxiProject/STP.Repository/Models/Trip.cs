@@ -21,7 +21,7 @@ public partial class Trip
 
     public decimal? UnitPrice { get; set; }
 
-    public DateTime? BookingDate { get; set; }
+    public DateOnly? BookingDate { get; set; }
 
     public TimeOnly? HourInDay { get; set; }
 

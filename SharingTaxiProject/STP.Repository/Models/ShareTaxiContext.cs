@@ -8,7 +8,10 @@ namespace STP.Repository.Models;
 
 public partial class ShareTaxiContext : DbContext
 {
-    public ShareTaxiContext() { }
+    public ShareTaxiContext()
+    {
+    }
+
     public ShareTaxiContext(DbContextOptions<ShareTaxiContext> options)
         : base(options)
     {
@@ -139,7 +142,6 @@ public partial class ShareTaxiContext : DbContext
 
             entity.ToTable("Trip");
 
-            entity.Property(e => e.BookingDate).HasColumnType("datetime");
             entity.Property(e => e.DropOffLocationId).HasColumnName("dropOffLocationId");
             entity.Property(e => e.PickUpLocationId).HasColumnName("pickUpLocationId");
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
