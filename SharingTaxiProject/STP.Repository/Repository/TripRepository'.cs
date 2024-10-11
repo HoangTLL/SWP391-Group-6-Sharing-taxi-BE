@@ -91,6 +91,11 @@ namespace STP.Repository
                 .Include(t => t.DropOffLocation)
                 .ToListAsync();
         }
+        public async Task<Trip> GetTripByIdAsync(int id)
+        {
+            return await _context.Trips
+                .FirstOrDefaultAsync(t => t.Id == id);
+        }
 
         // Search trips by location names
         public async Task<List<Trip>> SearchTripsByLocationAsync(string locationName)

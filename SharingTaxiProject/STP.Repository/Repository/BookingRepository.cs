@@ -16,6 +16,11 @@ namespace STP.Repository
             return await _context.Bookings
                 .FirstOrDefaultAsync(b => b.UserId == userId && b.TripId == tripId);
         }
+        public async Task<int> CountBookingsByTripIdAsync(int tripId)
+        {
+            return await _context.Bookings
+                .CountAsync(b => b.TripId == tripId);
+        }
 
         public async Task<bool> CreateBookingAsync(Booking booking)
         {

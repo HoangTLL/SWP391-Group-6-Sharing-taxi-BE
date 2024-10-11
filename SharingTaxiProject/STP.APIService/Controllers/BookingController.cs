@@ -27,44 +27,47 @@ namespace STP.API.Controllers
 
             try
             {
+                // Check if the user is already booked for this trip
                 var existingBooking = await _unitOfWork.BookingRepository.GetBookingByUserAndTripAsync(request.UserId, request.TripId);
                 if (existingBooking != null)
                 {
                     return BadRequest("User has already joined this trip.");
                 }
 
-                var trip = await _unitOfWork.TripRepository.GetByIdAsync(request.TripId);
+                // Retrieve trip details to check the maximum number of passengers
+                var trip = await _unitOfWork.TripRepository.GetTripByIdAsync(request.TripId);
                 if (trip == null)
                 {
                     return NotFound("Trip not found.");
                 }
 
-                var user = await _unitOfWork.UserRepository.GetByIdAsync(request.UserId);
-                if (user == null)
+                // Count the number of current bookings for the trip
+                var currentBookingsCount = await _unitOfWork.BookingRepository.CountBookingsByTripIdAsync(request.TripId);
+
+                // Check if the trip is already full
+                if (currentBookingsCount >= trip.MaxPerson)
                 {
-                    return NotFound("User not found.");
+                    return BadRequest("Trip is full. Cannot join.");
                 }
 
-                var newBooking = new Booking
+                // Create a new booking if the trip is not full
+                var booking = new Booking
                 {
                     UserId = request.UserId,
                     TripId = request.TripId,
-                    Status = 1 // Assuming 1 means "Active" or "Confirmed"
+                    Status = 1
                 };
 
-                var result = await _unitOfWork.BookingRepository.CreateBookingAsync(newBooking);
+                var result = await _unitOfWork.BookingRepository.CreateBookingAsync(booking);
                 if (result)
                 {
-                    return Ok(new { message = "Successfully joined the trip", bookingId = newBooking.Id });
+                    return Ok("Successfully joined the trip.");
                 }
-                else
-                {
-                    return StatusCode(500, "Failed to create booking.");
-                }
+
+                return StatusCode(500, "An error occurred while joining the trip.");
             }
             catch (Exception ex)
             {
-                // Log the exception
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
