@@ -19,13 +19,7 @@ public partial class Location
 
     public int? Status { get; set; }
 
-<<<<<<< Updated upstream
-    public virtual ICollection<Pricing> PricingDropOffLocations { get; set; } = new List<Pricing>();
-
-    public virtual ICollection<Pricing> PricingPickUpLocations { get; set; } = new List<Pricing>();
-=======
     public virtual Area Area { get; set; }
->>>>>>> Stashed changes
 
     public virtual ICollection<Trip> TripDropOffLocations { get; set; } = new List<Trip>();
 

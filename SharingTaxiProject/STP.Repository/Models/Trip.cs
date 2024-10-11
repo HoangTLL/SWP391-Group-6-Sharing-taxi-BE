@@ -27,20 +27,6 @@ public partial class Trip
 
     public int? PricingId { get; set; }
 
-<<<<<<< Updated upstream
-    public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
-
-    public virtual ICollection<CarTrip> CarTrips { get; set; } = new List<CarTrip>();
-
-    public virtual Location? DropOffLocation { get; set; }
-
-    public virtual Location? PickUpLocation { get; set; }
-
-    public virtual Pricing? Pricing { get; set; }
-
-    public virtual Area? ToArea { get; set; }
-}
-=======
     public int? TripTypeId { get; set; }
 
     public int? Status { get; set; }
@@ -55,4 +41,3 @@ public partial class Trip
 
     public virtual TripType TripType { get; set; }
 }
->>>>>>> Stashed changes

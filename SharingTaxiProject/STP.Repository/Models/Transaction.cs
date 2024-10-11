@@ -9,11 +9,8 @@ public partial class Transaction
 {
     public int Id { get; set; }
 
-<<<<<<< Updated upstream
-=======
     public int? DepositId { get; set; }
 
->>>>>>> Stashed changes
     public int? WalletId { get; set; }
 
     public decimal? Amount { get; set; }
@@ -24,11 +21,7 @@ public partial class Transaction
 
     public DateTime? CreatedAt { get; set; }
 
-<<<<<<< Updated upstream
-    public virtual ICollection<Deposit> Deposits { get; set; } = new List<Deposit>();
-=======
     public int? Status { get; set; }
->>>>>>> Stashed changes
 
     public virtual Deposit Deposit { get; set; }
 

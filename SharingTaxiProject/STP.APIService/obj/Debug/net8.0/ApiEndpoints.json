@@ -1,23 +1,14 @@
 [
   {
-<<<<<<< Updated upstream
-    "ContainingType": "STP.APIService.Controllers.AreaController",
-    "Method": "getAreaCategory",
-    "RelativePath": "api/Area",
-=======
     "ContainingType": "STP.APIService.Controllers.LocationController",
     "Method": "GetLocations",
     "RelativePath": "api/Location",
->>>>>>> Stashed changes
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": [
       {
-<<<<<<< Updated upstream
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[STP.Repository.Models.Area, STP.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-=======
         "Type": "System.Collections.Generic.IEnumerable\u00601[[STP.Repository.Models.Location, STP.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
@@ -108,7 +99,6 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[STP.Repository.Models.Location, STP.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
->>>>>>> Stashed changes
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -135,8 +125,6 @@
     "ReturnTypes": []
   },
   {
-<<<<<<< Updated upstream
-=======
     "ContainingType": "STP.APIService.Controllers.ProfileController",
     "Method": "GetProfile",
     "RelativePath": "api/Profile/{userId}",
@@ -268,7 +256,6 @@
     "ReturnTypes": []
   },
   {
->>>>>>> Stashed changes
     "ContainingType": "STP.APIService.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",

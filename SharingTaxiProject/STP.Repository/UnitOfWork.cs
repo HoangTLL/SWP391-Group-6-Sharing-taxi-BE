@@ -1,25 +1,12 @@
-﻿using STP.Repository.Models;
-using STP.Repository.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using STP.Repository.Models; // Tham chiếu đến các model
+using STP.Repository.Repository; // Tham chiếu đến các repository như AreaRepository
 
 namespace STP.Repository
 {
-    public class UnitOfWork
+    // Lớp UnitOfWork quản lý các repository và DbContext
+    public class UnitOfWork : IDisposable
     {
         private readonly ShareTaxiContext _context;
-<<<<<<< Updated upstream
-        private AreaRepository _areaRepository;
-        private UserRepository _userRepository;
-        public UnitOfWork() => _context = new ShareTaxiContext();
-        public UnitOfWork(ShareTaxiContext context) { _context = context; }
-        public AreaRepository areaRepository
-        {
-            get { return _areaRepository ??= new AreaRepository(_context); }
-=======
 
         // Khai báo các repository
         //private AreaRepository _areaRepository;
@@ -47,13 +34,12 @@ namespace STP.Repository
                 // If _areaRepository is null, initialize it with the current context
                 return _areaRepository ??= new AreaRepository(_context);
             }
->>>>>>> Stashed changes
         }
+
+        // Thuộc tính để truy cập UserRepository. Sử dụng lazy loading
         public UserRepository UserRepository
         {
             get { return _userRepository ??= new UserRepository(_context); }
-<<<<<<< Updated upstream
-=======
             // Nếu _userRepository chưa được khởi tạo (null), khởi tạo mới với _context
         }
 
@@ -84,7 +70,6 @@ namespace STP.Repository
         public void Dispose()
         {
             _context.Dispose();
->>>>>>> Stashed changes
         }
     }
 }
