@@ -158,6 +158,44 @@ namespace STP.API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        [HttpGet("searchByLocationIDPickupAndDropOff")]
+        public async Task<IActionResult> SearchTripsByLocationIds([FromQuery] int pickUpLocationId, [FromQuery] int dropOffLocationId)
+        {
+            try
+            {
+                if (pickUpLocationId <= 0 || dropOffLocationId <= 0)
+                {
+                    return BadRequest("Invalid pickup or drop-off location ID.");
+                }
+
+                var trips = await _unitOfWork.TripRepository.SearchActiveTripsByLocationsAsync(pickUpLocationId, dropOffLocationId);
+
+                if (trips == null || !trips.Any())
+                {
+                    return NotFound("No active trips found for the specified locations.");
+                }
+
+                var simplifiedTrips = trips.Select(t => new
+                {
+                    t.Id,
+                    t.PickUpLocationId,
+                    t.DropOffLocationId,
+                    t.MaxPerson,
+                    t.MinPerson,
+                    t.UnitPrice,
+                    t.BookingDate,
+                    t.HourInDay,
+                    t.Status
+                });
+
+                return Ok(simplifiedTrips);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
         public class UpdateTripStatusRequest
         {

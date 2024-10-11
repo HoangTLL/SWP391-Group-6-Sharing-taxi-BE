@@ -98,11 +98,23 @@ namespace STP.Repository
         }
 
         // Search trips by location names
-        public async Task<List<Trip>> SearchTripsByLocationAsync(string locationName)
+        public async Task<List<Trip>> SearchActiveTripsByLocationsAsync(int pickUpLocationId, int dropOffLocationId)
         {
             return await _context.Trips
-                .Where(t => t.PickUpLocation.Name.Contains(locationName) ||
-                            t.DropOffLocation.Name.Contains(locationName))
+                .Where(t => t.PickUpLocationId == pickUpLocationId &&
+                            t.DropOffLocationId == dropOffLocationId &&
+                            t.Status == 1)  // Filter by status
+                .Include(t => t.PickUpLocation)
+                .Include(t => t.DropOffLocation)
+                .ToListAsync();
+        }
+
+
+        public async Task<List<Trip>> SearchTripsByLocationsAsync(int pickUpLocationId, int dropOffLocationId)
+        {
+            return await _context.Trips
+                .Where(t => t.PickUpLocationId == pickUpLocationId &&
+                            t.DropOffLocationId == dropOffLocationId)
                 .Include(t => t.PickUpLocation)
                 .Include(t => t.DropOffLocation)
                 .ToListAsync();
