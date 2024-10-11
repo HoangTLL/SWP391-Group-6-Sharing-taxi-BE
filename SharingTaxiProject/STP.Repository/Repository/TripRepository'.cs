@@ -20,6 +20,7 @@ namespace STP.Repository
             await _context.SaveChangesAsync(); // Save changes to the database
         }
 
+
         // Get all trips with related entities
         public async Task<List<Trip>> GetAllTripsWithDetailsAsync()
         {
@@ -99,6 +100,11 @@ namespace STP.Repository
                 .Include(t => t.PickUpLocation)
                 .Include(t => t.DropOffLocation)
                 .ToListAsync();
+        }
+
+        public async Task<List<Trip>> GetAllTripsAsync()
+        {
+            return await _context.Trips.ToListAsync();
         }
     }
 }

@@ -2,6 +2,7 @@
 using STP.Repository;
 using STP.Repository.Models;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace STP.API.Controllers
@@ -53,9 +54,114 @@ namespace STP.API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetTripById(int id)
+        {
+            try
+            {
+                var trip = await _unitOfWork.TripRepository.GetByIdAsync(id);
 
-        
+                if (trip == null)
+                {
+                    return NotFound($"Trip with ID {id} not found.");
+                }
 
+                var simplifiedTrip = new
+                {
+                    trip.Id,
+                    trip.PickUpLocationId,
+                    trip.DropOffLocationId,
+                    trip.ToAreaId,
+                    trip.MaxPerson,
+                    trip.MinPerson,
+                    trip.UnitPrice,
+                    trip.BookingDate,
+                    trip.HourInDay,
+                    trip.PricingId,
+                    trip.TripTypeId,
+                    trip.Status
+                };
+
+                return Ok(simplifiedTrip);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("list")]
+        public async Task<IActionResult> GetTripList()
+        {
+            try
+            {
+                var trips = await _unitOfWork.TripRepository.GetAllTripsAsync();
+                if (trips == null || !trips.Any())
+                {
+                    return NotFound("No trips available.");
+                }
+
+                var simplifiedTrips = trips.Select(t => new
+                {
+                    t.Id,
+                    t.PickUpLocationId,
+                    t.DropOffLocationId,
+                    t.ToAreaId,
+                    t.MaxPerson,
+                    t.MinPerson,
+                    t.UnitPrice,
+                    t.BookingDate,
+                    t.HourInDay,
+                    t.PricingId,
+                    t.TripTypeId,
+                    t.Status
+                });
+
+                return Ok(simplifiedTrips);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        [HttpPatch("updateStatus/{id}")]
+        public async Task<IActionResult> UpdateTripStatus(int id, [FromBody] UpdateTripStatusRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var trip = await _unitOfWork.TripRepository.GetByIdAsync(id);
+
+                if (trip == null)
+                {
+                    return NotFound($"Trip with ID {id} not found.");
+                }
+
+                trip.Status = request.NewStatus;
+
+                await _unitOfWork.TripRepository.UpdateAsync(trip);
+                await _unitOfWork.SaveAsync();
+
+                return Ok(new { message = "Trip status updated successfully", tripId = trip.Id, newStatus = trip.Status });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        public class UpdateTripStatusRequest
+        {
+            [Required]
+            public int NewStatus { get; set; }
+        }
         private async Task<(Location pickUp, Location dropOff)> GetLocations(int pickUpId, int dropOffId)
         {
             var pickUpLocation = await _unitOfWork.LocationRepository.GetByIdAsync(pickUpId);
