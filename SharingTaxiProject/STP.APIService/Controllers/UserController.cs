@@ -18,6 +18,7 @@ namespace STP.API.Controllers
         }
 
         // POST: api/User/SignUp
+        // POST: api/User/SignUp
         [HttpPost("SignUp")]
         public async Task<IActionResult> SignUp([FromBody] UserSignUpDto userSignUpDto)
         {
@@ -37,13 +38,14 @@ namespace STP.API.Controllers
 
             try
             {
-                // Create new user without manually setting the Id
+                // Create new user and set Status = 1
                 var newUser = new User
                 {
                     Email = userSignUpDto.Email,
                     Password = userSignUpDto.Password,
                     CreatedAt = utcPlus7,
-                    Role = "user"
+                    Role = "user",
+                    Status = 1 // Set status to 1 when signing up
                 };
 
                 await _userRepository.CreateAsync(newUser);
@@ -59,6 +61,7 @@ namespace STP.API.Controllers
                 return StatusCode(500, new { message = "An error occurred while processing your request." });
             }
         }
+
 
         [HttpPut("UpdateUser{id}")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserDto updateUserDto)
@@ -117,28 +120,26 @@ namespace STP.API.Controllers
                 });
             }
 
-            // Create a new user with updated details
-            var user = await _userRepository.GetByIdAsync(id);
-            if (user == null)
-                return NotFound("User not found.");
-
             // Update user properties
-            user.Name = updateUserDto.Name;
-            user.Email = updateUserDto.Email;
-            user.PhoneNumber = updateUserDto.PhoneNumber;
-            user.Password = updateUserDto.Password; // Remember to hash passwords in production
-            user.DateOfBirth = updateUserDto.DateOfBirth;
-            user.Role = updateUserDto.Role;
+            existingUser.Name = updateUserDto.Name;
+            existingUser.Email = updateUserDto.Email;
+            existingUser.PhoneNumber = updateUserDto.PhoneNumber;
+            existingUser.Password = updateUserDto.Password; // Remember to hash passwords in production
+            existingUser.DateOfBirth = updateUserDto.DateOfBirth;
+            existingUser.Role = updateUserDto.Role;
+            existingUser.Status = updateUserDto.Status; // Update status
+
             try
             {
-                await _userRepository.UpdateAsync(user);
-                return Ok(new { message = "User updated successfully." }); // Return success message
+                await _userRepository.UpdateAsync(existingUser);
+                return Ok(new { message = "User updated successfully." });
             }
             catch (Exception)
             {
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
+
 
 
         // GET: api/UserList
@@ -160,7 +161,8 @@ namespace STP.API.Controllers
                     Password = u.Password,
                     DateOfBirth = u.DateOfBirth,
                     CreatedAt = u.CreatedAt,
-                    Role = u.Role
+                    Role = u.Role,
+                    Status = u.Status
                 }).ToList();
 
                 // Return the list of user DTOs
@@ -185,6 +187,7 @@ namespace STP.API.Controllers
         public DateOnly? DateOfBirth { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string? Role { get; set; }
+        public int? Status { get; set; }
     }
 
     public class UserSignUpDto
@@ -209,5 +212,7 @@ namespace STP.API.Controllers
         public string Password { get; set; } // Remember to hash passwords in production
         public DateOnly? DateOfBirth { get; set; }
         public string Role { get; set; } // New field for updating user role
+        public int Status { get; set; } // New field for updating user status
     }
+
 }
