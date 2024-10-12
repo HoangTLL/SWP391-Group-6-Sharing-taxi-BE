@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PMS.Repository.Base;
-
 using STP.Repository.Models; // Reference to the Area model
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,7 +13,7 @@ namespace STP.Repository.Repository
         public AreaRepository(ShareTaxiContext context) : base(context) { }
 
         // Asynchronous method to retrieve all Areas, including related Locations
-        public async Task<List<Area>> GetAllAsync()
+        public async Task<List<Area>> GetAllAreasWithLocationsAsync()
         {
             return await _context.Areas
                 .Include(a => a.Locations) // Include related Locations
@@ -22,11 +21,15 @@ namespace STP.Repository.Repository
         }
 
         // Asynchronous method to retrieve a specific Area by its ID, including related Locations
-        public async Task<Area> GetByIdAsync(int id)
+        public async Task<Area> GetAreaWithLocationsByIdAsync(int id)
         {
             return await _context.Areas
                 .Include(a => a.Locations) // Include related Locations
                 .FirstOrDefaultAsync(a => a.Id == id); // Return the Area that matches the ID
+        }
+        public async Task AddAsync(Area area)
+        {
+            await _context.Areas.AddAsync(area); // Add the Area entity to the context
         }
     }
 }
