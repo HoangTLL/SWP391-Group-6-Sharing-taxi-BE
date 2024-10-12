@@ -10,9 +10,9 @@ namespace STP.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly UnitOfWork _unitOfWork;
         private readonly UserRepository _userRepository;
         private readonly WalletRepository _walletRepository;
-        private readonly UnitOfWork _unitOfWork;
 
         public UserController(UnitOfWork unitOfWork)
         {
@@ -21,6 +21,7 @@ namespace STP.API.Controllers
             _walletRepository = unitOfWork.WalletRepository;
         }
 
+        // POST: api/User/SignUp
         [HttpPost("SignUp")]
         public async Task<IActionResult> SignUp([FromBody] UserSignUpDto userSignUpDto)
         {
@@ -32,38 +33,41 @@ namespace STP.API.Controllers
             {
                 return BadRequest(new
                 {
-                    message = "Email is already registered."
+                    message = "Email is already registered.",
                 });
             }
 
             var utcPlus7 = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time"));
-            var dateOfBirth = DateOnly.FromDateTime(userSignUpDto.DateOfBirth);
 
             try
             {
+                // Chuyển đổi DateTime thành DateOnly nếu userSignUpDto.DateOfBirth là kiểu DateTime
+                var dateOfBirth = DateOnly.FromDateTime(userSignUpDto.DateOfBirth);
+
                 var newUser = new User
                 {
                     // Không cần gán Id, SQL Server sẽ tự động tăng giá trị
                     Name = userSignUpDto.Name,                 // Gán tên từ DTO
                     Email = userSignUpDto.Email,               // Gán email
                     PhoneNumber = userSignUpDto.PhoneNumber,   // Gán số điện thoại
-                    DateOfBirth = dateOfBirth,   // Gán ngày sinh
-                    Password = userSignUpDto.Password,
+                    DateOfBirth = dateOfBirth,                 // Gán ngày sinh đã chuyển đổi sang DateOnly
+                    Password = userSignUpDto.Password,         // Hash mật khẩu nếu cần
                     CreatedAt = utcPlus7,                      // Gán thời gian tạo
                     Role = "user"                              // Gán role mặc định
                 };
 
-                // Tạo người dùng
+
+                // Tạo người dùng mới
                 await _userRepository.CreateAsync(newUser);
 
                 // Sau khi người dùng được tạo thành công, tạo ví điện tử cho người dùng
                 var newWallet = new Wallet
                 {
-                    UserId = newUser.Id,      // Gán ví cho người dùng mới tạo
-                    Balance = 0,              // Số dư ban đầu là 0
-                    CurrencyCode = "VND",     // Hoặc loại tiền tệ khác
-                    CreatedAt = utcPlus7,     // Sử dụng thời gian giống như khi tạo user
-                    Status = 1                // Trạng thái Active
+                    UserId = newUser.Id,  // Gán ví cho người dùng mới tạo
+                    Balance = 0,          // Số dư ban đầu là 0
+                    CurrencyCode = "VND",  // Hoặc loại tiền tệ khác
+                    CreatedAt = utcPlus7,  // Sử dụng thời gian giống như khi tạo user
+                    Status = 1             // Trạng thái Active
                 };
 
                 // Lưu ví vào cơ sở dữ liệu
@@ -76,12 +80,13 @@ namespace STP.API.Controllers
                 return Ok(new
                 {
                     message = "User signed up successfully.",
-                    userId = newUser.Id,       // Trả về ID người dùng mới tạo
-                    walletId = newWallet.Id    // Trả về ID của ví mới tạo
+                    userId = newUser.Id, // Trả về ID người dùng mới tạo
+                    walletId = newWallet.Id // Trả về ID của ví mới tạo
                 });
             }
             catch (Exception ex)
             {
+                // Log the exception (not shown here)
                 return StatusCode(500, new { message = "An error occurred while processing your request." });
             }
         }
@@ -215,12 +220,13 @@ namespace STP.API.Controllers
 
     public class UserSignUpDto
     {
-        public string Name { get; set; }           // Tên người dùng
-        public string Email { get; set; }          // Email
-        public string PhoneNumber { get; set; }    // Số điện thoại
-        public DateTime DateOfBirth { get; set; }  // Ngày sinh
-        public string Password { get; set; }       // Mật khẩu
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime DateOfBirth { get; set; }  // Sử dụng DateTime
+        public string Password { get; set; }
     }
+
 
     public class UpdateUserDto
     {

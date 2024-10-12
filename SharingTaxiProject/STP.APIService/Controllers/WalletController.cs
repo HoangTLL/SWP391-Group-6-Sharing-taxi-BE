@@ -75,35 +75,43 @@ namespace STP.APIService.Controllers
             }
         }
 
-
         [HttpPost("PayForTrip")]
-        public async Task<IActionResult> PayForTrip(int walletId, int tripId, decimal amount)
+        public async Task<IActionResult> PayForTrip(int walletId, int tripId, int numberOfParticipants)
         {
             try
             {
-               
+                // Lấy thông tin chuyến đi
+                var trip = await _unitOfWork.TripRepository.GetByIdAsync(tripId);
+                if (trip == null) return NotFound("Trip not found.");
+
+                // Tính giá cho chuyến đi dựa trên số người tham gia
+                decimal totalPrice = await CalculateTripPrice(trip.TripTypeId, numberOfParticipants);
+
+                // Lấy thông tin ví và kiểm tra số dư
                 var wallet = await _unitOfWork.WalletRepository.GetByIdAsync(walletId);
                 if (wallet == null) return NotFound("Wallet not found.");
-                if (wallet.Balance < amount) return BadRequest("Insufficient balance.");
+                if (wallet.Balance < totalPrice) return BadRequest("Insufficient balance.");
 
+                // Tạo giao dịch thanh toán
                 var transaction = new Transaction
                 {
                     WalletId = walletId,
-                    
-                    Amount = -amount,
+                    Amount = -totalPrice,
                     TransactionType = "Payment",
                     CreatedAt = DateTime.Now,
                     ReferenceId = $"Trip_{tripId}",
                     Status = 1 // Đang xử lý
                 };
 
+                // Ghi giao dịch vào cơ sở dữ liệu
                 await _unitOfWork.TransactionRepository.CreateAsync(transaction);
 
-                wallet.Balance -= amount;
+                // Cập nhật số dư ví
+                wallet.Balance -= totalPrice;
                 await _unitOfWork.WalletRepository.UpdateAsync(wallet);
                 await _unitOfWork.SaveAsync();
 
-                return Ok(new { message = "Payment successful", balance = wallet.Balance });
+                return Ok(new { message = "Payment successful", totalAmount = totalPrice, balance = wallet.Balance });
             }
             catch (Exception ex)
             {
@@ -111,35 +119,64 @@ namespace STP.APIService.Controllers
             }
         }
 
-        [HttpPost("Refund")]
-        public async Task<IActionResult> Refund(int walletId, int tripId, decimal amount)
+        [HttpPost("RefundTrip")]
+        public async Task<IActionResult> RefundTrip(int tripId, decimal actualTripCost)
         {
             try
             {
-                var wallet = await _unitOfWork.WalletRepository.GetByIdAsync(walletId);
-                if (wallet == null) return NotFound("Wallet not found.");
+                // Lấy thông tin chuyến đi
+                var trip = await _unitOfWork.TripRepository.GetByIdAsync(tripId);
+                if (trip == null) return NotFound("Trip not found.");
 
-                var refund = new Transaction
+                // Lấy danh sách tất cả người dùng tham gia chuyến đi
+                var participants = await _unitOfWork.TripRepository.GetTripParticipantsAsync(tripId);
+                if (participants == null || !participants.Any())
+                    return NotFound("No participants found for the trip.");
+
+                // Tính tổng số tiền mà tất cả người dùng đã trả
+                decimal totalAmountCharged = participants.Sum(p => p.AmountPaid);
+
+                // Tính số tiền dư cần hoàn trả
+                decimal totalRefundAmount = totalAmountCharged - actualTripCost;
+                if (totalRefundAmount <= 0)
+                    return BadRequest("No refund is necessary as the actual trip cost is higher than or equal to the charged amount.");
+
+                // Chia đều số tiền dư cho tất cả người dùng
+                decimal refundPerUser = totalRefundAmount / participants.Count;
+
+                // Hoàn tiền cho từng người dùng
+                foreach (var participant in participants)
                 {
-                    WalletId = walletId,
-                    Amount = amount,
-                    TransactionType = "Refund",
-                    CreatedAt = DateTime.Now,
-                    ReferenceId = $"Refund_Trip_{tripId}",
-                    Status = 1 // Đang xử lý
-                };
+                    var wallet = await _unitOfWork.WalletRepository.GetByUserIdAsync(participant.UserId);
+                    if (wallet == null) return NotFound($"Wallet not found for user {participant.UserId}");
 
-                await _unitOfWork.TransactionRepository.CreateAsync(refund);
+                    // Tạo giao dịch hoàn tiền
+                    var refundTransaction = new Transaction
+                    {
+                        WalletId = wallet.Id,
+                        Amount = refundPerUser,
+                        TransactionType = "Refund",
+                        CreatedAt = DateTime.Now,
+                        ReferenceId = $"Refund_Trip_{tripId}",
+                        Status = 1 // Đang xử lý
+                    };
 
-                wallet.Balance += amount;
-                await _unitOfWork.WalletRepository.UpdateAsync(wallet);
+                    // Ghi giao dịch vào cơ sở dữ liệu
+                    await _unitOfWork.TransactionRepository.CreateAsync(refundTransaction);
+
+                    // Cập nhật số dư của người dùng
+                    wallet.Balance += refundPerUser;
+                    await _unitOfWork.WalletRepository.UpdateAsync(wallet);
+                }
+
+                // Lưu các thay đổi
                 await _unitOfWork.SaveAsync();
 
-                return Ok(new { message = "Refund successful", balance = wallet.Balance });
+                return Ok(new { message = "Refund successful for all participants", refundPerUser });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "An error occurred during refund", error = ex.Message });
+                return StatusCode(500, new { message = "An error occurred during the refund process", error = ex.Message });
             }
         }
 

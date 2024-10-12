@@ -1,37 +1,45 @@
-﻿using STP.Repository.Models;
-using STP.Repository.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using STP.Repository.Models; // Tham chiếu đến các model
+using STP.Repository.Repository; // Tham chiếu đến các repository như AreaRepository
 
 namespace STP.Repository
 {
-    public class UnitOfWork
+    // Lớp UnitOfWork quản lý các repository và DbContext
+    public class UnitOfWork : IDisposable
     {
         private readonly ShareTaxiContext _context;
+
+        // Khai báo các repository
         private AreaRepository _areaRepository;
         private UserRepository _userRepository;
-<<<<<<< Updated upstream
-=======
         private LocationRepository _locationRepository;
         private WalletRepository _walletRepository;
         private TransactionRepository _transactionRepository;
         private DepositRepository _depositRepository;
+        private TripRepository _tripRepository;
+
         // Constructor không tham số: khởi tạo DbContext (ShareTaxiContext)
->>>>>>> Stashed changes
         public UnitOfWork() => _context = new ShareTaxiContext();
-        public UnitOfWork(ShareTaxiContext context) { _context = context; }
-        public AreaRepository areaRepository
+
+        // Constructor có tham số: nhận vào một đối tượng ShareTaxiContext
+        public UnitOfWork(ShareTaxiContext context)
+        {
+            _context = context;
+        }
+        // Thuộc tính để truy cập TripRepository
+        public TripRepository TripRepository =>
+            _tripRepository ??= new TripRepository(_context);
+
+        // Thuộc tính để truy cập AreaRepository. Sử dụng lazy loading (chỉ khởi tạo khi cần)
+        public AreaRepository AreaRepository
         {
             get { return _areaRepository ??= new AreaRepository(_context); }
+            // Nếu _areaRepository chưa được khởi tạo (null), khởi tạo mới với _context
         }
+
+        // Thuộc tính để truy cập UserRepository. Sử dụng lazy loading
         public UserRepository UserRepository
         {
             get { return _userRepository ??= new UserRepository(_context); }
-<<<<<<< Updated upstream
-=======
             // Nếu _userRepository chưa được khởi tạo (null), khởi tạo mới với _context
         }
 
@@ -41,24 +49,25 @@ namespace STP.Repository
             get { return _locationRepository ??= new LocationRepository(_context); }
             // Nếu _locationRepository chưa được khởi tạo (null), khởi tạo mới với _context
         }
+        public WalletRepository WalletRepository =>
+        _walletRepository ??= new WalletRepository(_context);
+
         public TransactionRepository TransactionRepository =>
-        _transactionRepository ??= new TransactionRepository(_context);
+            _transactionRepository ??= new TransactionRepository(_context);
 
         public DepositRepository DepositRepository =>
             _depositRepository ??= new DepositRepository(_context);
+
         // Phương thức lưu thay đổi vào cơ sở dữ liệu
         public async Task<int> SaveAsync()
         {
             return await _context.SaveChangesAsync();
         }
-        public WalletRepository WalletRepository =>
-        _walletRepository ??= new WalletRepository(_context);
 
         // Phương thức Dispose để giải phóng tài nguyên
         public void Dispose()
         {
             _context.Dispose();
->>>>>>> Stashed changes
         }
     }
 }

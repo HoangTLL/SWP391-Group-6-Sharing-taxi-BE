@@ -12,8 +12,6 @@ C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\r
 C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.pdb
 C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.genruntimeconfig.cache
 C:\Users\Admin\source\repos\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\ref\STP.Repository.dll
-<<<<<<< Updated upstream
-=======
 C:\Users\phucn\Source\Repos\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.deps.json
 C:\Users\phucn\Source\Repos\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.runtimeconfig.json
 C:\Users\phucn\Source\Repos\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.dll
@@ -43,4 +41,3 @@ D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\o
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.pdb
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.genruntimeconfig.cache
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\ref\STP.Repository.dll
->>>>>>> Stashed changes
