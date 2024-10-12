@@ -27,6 +27,13 @@ namespace STP.Repository
             await _context.Bookings.AddAsync(booking);
             return await _context.SaveChangesAsync() > 0;
         }
+        public async Task<IEnumerable<Booking>> GetBookingsByTripIdAsync(int tripId)
+        {
+            return await _context.Bookings
+                .Include(b => b.User) // Include user details
+                .Where(b => b.TripId == tripId)
+                .ToListAsync();
+        }
 
         public async Task<bool> DeleteBookingAsync(Booking booking)
         {

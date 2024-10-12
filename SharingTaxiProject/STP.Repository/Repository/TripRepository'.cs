@@ -52,13 +52,13 @@ namespace STP.Repository
         // Updated method to handle DateOnly
         public async Task<List<Trip>> GetAvailableTripsAsync()
         {
-            var today = DateOnly.FromDateTime(DateTime.Now);
             return await _context.Trips
-                .Where(t => t.BookingDate > today && t.MaxPerson > t.Bookings.Count)
+                .Where(t => t.Status == 1 && t.MaxPerson > t.Bookings.Count)
                 .Include(t => t.PickUpLocation)
                 .Include(t => t.DropOffLocation)
                 .ToListAsync();
         }
+
 
         // Update trip details
         public async Task UpdateTripDetailsAsync(Trip trip)

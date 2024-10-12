@@ -127,6 +127,39 @@ namespace STP.API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        [HttpGet("availableTrips")]
+        public async Task<IActionResult> GetAvailableTrips()
+        {
+            try
+            {
+                var trips = await _unitOfWork.TripRepository.GetAvailableTripsAsync();
+
+                if (trips == null || !trips.Any())
+                {
+                    return NotFound("No available trips found.");
+                }
+
+                var simplifiedTrips = trips.Select(t => new
+                {
+                    t.Id,
+                    t.PickUpLocationId,
+                    t.DropOffLocationId,
+                    t.MaxPerson,
+                    t.MinPerson,
+                    t.UnitPrice,
+                    t.BookingDate,
+                    t.HourInDay,
+                    t.Status
+                });
+
+                return Ok(simplifiedTrips);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
 
         [HttpPatch("updateStatus/{id}")]
         public async Task<IActionResult> UpdateTripStatus(int id, [FromBody] UpdateTripStatusRequest request)
