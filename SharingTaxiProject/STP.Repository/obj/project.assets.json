@@ -4415,11 +4415,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj",
+      "projectUniqueName": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj",
       "projectName": "STP.Repository",
-      "projectPath": "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj",
+      "projectPath": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj",
       "packagesPath": "C:\\Users\\phucn\\.nuget\\packages\\",
-      "outputPath": "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.Repository\\obj\\",
+      "outputPath": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\phucn\\AppData\\Roaming\\NuGet\\NuGet.Config",

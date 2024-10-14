@@ -16,6 +16,7 @@ namespace STP.Repository.Models
         public int? MaxPerson { get; set; }
 
         public int? MinPerson { get; set; }
+        public int? Status { get; set; }
 
         public decimal? UnitPrice { get; set; }
 

@@ -3555,11 +3555,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
+      "projectUniqueName": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
       "projectName": "STP.APIService",
-      "projectPath": "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
+      "projectPath": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
       "packagesPath": "C:\\Users\\phucn\\.nuget\\packages\\",
-      "outputPath": "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.APIService\\obj\\",
+      "outputPath": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\phucn\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3577,8 +3577,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj": {
-              "projectPath": "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj"
+            "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj": {
+              "projectPath": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj"
             }
           }
         }
