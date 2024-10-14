@@ -37,8 +37,8 @@ public class TripCalculatorController : ControllerBase
             return NotFound("Trip type not found for the specified areas.");
         }
 
-        // Bước 2: Lấy thông tin giá từ bảng TripeTypePricing dựa trên minPerson mà người dùng chọn
-        var pricing = _context.TripeTypePricings
+        // Bước 2: Lấy thông tin giá từ bảng TripTypePricing dựa trên minPerson mà người dùng chọn
+        var pricing = _context.TripTypePricings
             .FirstOrDefault(p => p.TripType == tripType.Id && p.MinPerson == minPerson);
 
         if (pricing == null)
@@ -46,7 +46,7 @@ public class TripCalculatorController : ControllerBase
             return NotFound("Pricing not available for the specified minPerson.");
         }
 
-        // Bước 3: Lấy giá từ TripeTypePricing cho mỗi người
+        // Bước 3: Lấy giá từ TripTypePricing cho mỗi người
         decimal pricePerPerson = pricing.PricePerPerson;
 
         // Bước 4: Tính tổng chi phí dựa trên giá của MinPerson nhưng số lượng người là MaxPerson

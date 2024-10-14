@@ -9,13 +9,18 @@ namespace STP.Repository
         private readonly ShareTaxiContext _context;
 
         // Khai báo các repository
-        //private AreaRepository _areaRepository;
+        private AreaRepository _areaRepository;
         private UserRepository _userRepository;
         private LocationRepository _locationRepository;
+        private WalletRepository _walletRepository;
+        private TransactionRepository _transactionRepository;
+        private DepositRepository _depositRepository;
         private TripRepository _tripRepository;
         private TripTypeRepository _tripTypeRepository;
-        private BookingRepository _bookingRepository;
-        private CarTripRepository _carTripRepository;
+        private TripTypePricingRepository _tripTypePricingRepository;
+        private BookingRepository _bookingRepository; // Thêm BookingRepository
+
+
         // Constructor không tham số: khởi tạo DbContext (ShareTaxiContext)
         public UnitOfWork() => _context = new ShareTaxiContext();
 
@@ -24,17 +29,18 @@ namespace STP.Repository
         {
             _context = context;
         }
+        // Khởi tạo TripTypePricingRepository
+        public TripTypePricingRepository TripTypePricingRepository =>
+            _tripTypePricingRepository ??= new TripTypePricingRepository(_context);
+        // Thuộc tính để truy cập TripRepository
+        public TripRepository TripRepository =>
+            _tripRepository ??= new TripRepository(_context);
 
-        private AreaRepository _areaRepository; // Field to hold the instance of AreaRepository
-
-        // Property to access AreaRepository using lazy loading
+        // Thuộc tính để truy cập AreaRepository. Sử dụng lazy loading (chỉ khởi tạo khi cần)
         public AreaRepository AreaRepository
         {
-            get
-            {
-                // If _areaRepository is null, initialize it with the current context
-                return _areaRepository ??= new AreaRepository(_context);
-            }
+            get { return _areaRepository ??= new AreaRepository(_context); }
+            // Nếu _areaRepository chưa được khởi tạo (null), khởi tạo mới với _context
         }
 
         // Thuộc tính để truy cập UserRepository. Sử dụng lazy loading
@@ -50,27 +56,24 @@ namespace STP.Repository
             get { return _locationRepository ??= new LocationRepository(_context); }
             // Nếu _locationRepository chưa được khởi tạo (null), khởi tạo mới với _context
         }
-        // Thuộc tính để truy cập TripRepository. Sử dụng lazy loading
-        public TripRepository TripRepository
-        {
-            get { return _tripRepository ??= new TripRepository(_context); }
-            // Nếu _tripRepository chưa được khởi tạo (null), khởi tạo mới với _context
-        }
-        // Thuộc tính để truy cập TripTypeRepository. Sử dụng lazy loading
-        public TripTypeRepository TripTypeRepository
-        {
-            get { return _tripTypeRepository ??= new TripTypeRepository(_context); }
-        }
+        public WalletRepository WalletRepository =>
+        _walletRepository ??= new WalletRepository(_context);
 
+        public TransactionRepository TransactionRepository =>
+            _transactionRepository ??= new TransactionRepository(_context);
+
+        public DepositRepository DepositRepository =>
+            _depositRepository ??= new DepositRepository(_context);
+        // Thuộc tính để truy cập TripTypeRepository
+        public TripTypeRepository TripTypeRepository =>
+            _tripTypeRepository ??= new TripTypeRepository(_context);
+        // Thuộc tính để truy cập BookingRepository
         public BookingRepository BookingRepository
         {
             get { return _bookingRepository ??= new BookingRepository(_context); }
         }
-        public CarTripRepository CarTripRepository
-        {
-            get { return _carTripRepository ??= new CarTripRepository(_context); }
 
-        }
+
         // Phương thức lưu thay đổi vào cơ sở dữ liệu
         public async Task<int> SaveAsync()
         {

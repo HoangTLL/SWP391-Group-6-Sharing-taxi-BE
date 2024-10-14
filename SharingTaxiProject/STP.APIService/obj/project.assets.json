@@ -3550,19 +3550,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\phucn\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
+      "projectUniqueName": "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
       "projectName": "STP.APIService",
-      "projectPath": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.APIService\\obj\\",
+      "projectPath": "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
+      "packagesPath": "C:\\Users\\phucn\\.nuget\\packages\\",
+      "outputPath": "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.APIService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\phucn\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3577,8 +3577,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj": {
-              "projectPath": "C:\\Users\\Admin\\source\\repos\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj"
+            "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj": {
+              "projectPath": "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj"
             }
           }
         }
@@ -3622,7 +3622,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

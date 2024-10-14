@@ -1,5 +1,25 @@
 [
   {
+    "ContainingType": "STP.APIService.Controllers.AreaController",
+    "Method": "GetAreas",
+    "RelativePath": "api/Area",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[STP.Repository.Models.Area, STP.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "STP.APIService.Controllers.LocationController",
     "Method": "GetLocations",
     "RelativePath": "api/Location",
@@ -141,22 +161,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "STP.API.Controllers.TripController",
-    "Method": "CreateTrip",
-    "RelativePath": "api/Trip/create",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "STP.API.Controllers.CreateTripRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "TripCalculatorController",
     "Method": "CalculateTotalCost",
     "RelativePath": "api/TripCalculator/CalculateTotalCost",
@@ -253,6 +257,69 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.APIService.Controllers.WalletController",
+    "Method": "Deposit",
+    "RelativePath": "api/Wallet/Deposit",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "walletId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "amount",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "method",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.APIService.Controllers.WalletController",
+    "Method": "PayForTrip",
+    "RelativePath": "api/Wallet/PayForTrip",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tripId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.APIService.Controllers.WalletController",
+    "Method": "RefundTrip",
+    "RelativePath": "api/Wallet/RefundTrip",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tripId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "TripType",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
