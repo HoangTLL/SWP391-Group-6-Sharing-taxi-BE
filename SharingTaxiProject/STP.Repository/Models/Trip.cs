@@ -24,8 +24,6 @@ namespace STP.Repository.Models
 
         public TimeOnly? HourInDay { get; set; }
 
-        public int? PricingId { get; set; }
-
         // Khóa ngoại liên kết đến TripType
         public int TripTypeId { get; set; }
 

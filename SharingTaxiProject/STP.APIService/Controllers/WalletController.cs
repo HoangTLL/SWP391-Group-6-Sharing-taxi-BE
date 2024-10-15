@@ -80,105 +80,122 @@ namespace STP.APIService.Controllers
         {
             try
             {
-                // Lấy thông tin chuyến đi
                 var trip = await _unitOfWork.TripRepository.GetByIdAsync(tripId);
                 if (trip == null) return NotFound("Trip not found.");
 
-                // Lấy danh sách các booking của chuyến đi
                 var bookings = await _unitOfWork.BookingRepository.GetBookingsByTripIdAsync(tripId);
                 if (bookings == null || !bookings.Any()) return NotFound("No bookings found for this trip.");
 
-                // Tính giá cho chuyến đi dựa trên số người tham gia (số lượng booking)
-                decimal totalPricePerPerson = await _unitOfWork.TripRepository.CalculateTripPrice(trip.PickUpLocationId.Value, trip.DropOffLocationId.Value, bookings.Count());
+                var (totalCost, pricePerPerson, minPerson, maxPerson) = await _unitOfWork.TripTypePricingRepository.CalculateTripPrice(tripId);
 
-                // Duyệt qua danh sách người tham gia để trừ tiền
+                int actualParticipants = bookings.Count();
+                int chargedParticipants = Math.Max(actualParticipants, minPerson);
+
+                // Xử lý thanh toán
                 foreach (var booking in bookings)
                 {
-                    // Lấy thông tin ví của từng người dùng trong bảng Booking
                     var wallet = await _unitOfWork.WalletRepository.GetWalletByUserIdAsync(booking.UserId.Value);
                     if (wallet == null) return NotFound($"Wallet not found for user {booking.UserId}.");
 
-                    // Kiểm tra số dư của ví
-                    if (wallet.Balance < totalPricePerPerson)
+                    if (wallet.Balance < pricePerPerson)
                     {
                         return BadRequest($"Insufficient balance for user {booking.UserId}.");
                     }
 
-                    // Trừ tiền từ ví của từng người
-                    wallet.Balance -= totalPricePerPerson;
-
-                    // Cập nhật thông tin ví
+                    wallet.Balance -= pricePerPerson;
                     await _unitOfWork.WalletRepository.UpdateAsync(wallet);
+
+                    var transaction = new Transaction
+                    {
+                        WalletId = wallet.Id,
+                        Amount = pricePerPerson,
+                        TransactionType = "Payment",
+                        CreatedAt = DateTime.Now,
+                        ReferenceId = $"Trip_{tripId}",
+                        Status = 1
+                    };
+                    await _unitOfWork.TransactionRepository.CreateAsync(transaction);
                 }
 
-                // Lưu các thay đổi
+                trip.UnitPrice = pricePerPerson;
+                trip.Status = 2; // Giả sử 2 là trạng thái "Đã thanh toán"
+                await _unitOfWork.TripRepository.UpdateAsync(trip);
+
                 await _unitOfWork.SaveAsync();
 
-                return Ok(new { message = "Payment successful", totalAmountCharged = totalPricePerPerson * bookings.Count() });
-
+                return Ok(new
+                {
+                    message = "Payment successful",
+                    totalAmountCharged = totalCost,
+                    pricePerPerson,
+                    actualParticipants,
+                    chargedParticipants,
+                    minPerson,
+                    maxPerson,
+                    potentialRefund = chargedParticipants > actualParticipants ? (chargedParticipants - actualParticipants) * pricePerPerson : 0
+                });
             }
             catch (Exception ex)
             {
                 return StatusCode(500, new { message = "An error occurred during payment", error = ex.Message });
             }
-        }
-
+        
+    }
         [HttpPost("RefundTrip")]
-        public async Task<IActionResult> RefundTrip(int tripId , int TripType)
+        public async Task<IActionResult> RefundTrip(int tripId)
         {
             try
             {
-                // 1. Lấy thông tin chuyến đi
+                // Lấy thông tin chuyến đi
                 var trip = await _unitOfWork.TripRepository.GetByIdAsync(tripId);
                 if (trip == null) return NotFound("Không tìm thấy chuyến đi.");
 
-                // 2. Lấy danh sách những người tham gia chuyến đi
-                var participants = await _unitOfWork.TripRepository.GetTripParticipantsAsync(tripId);
-                if (participants == null || !participants.Any())
-                    return NotFound("Không tìm thấy người tham gia cho chuyến đi này.");
+                // Lấy tất cả giao dịch liên quan đến chuyến đi từ bảng Transaction
+                var transactions = await _unitOfWork.TransactionRepository
+                    .GetTransactionsByTripIdAsync(tripId, "Payment");
 
-                // 3. Tạo DTO để chứa thông tin cần thiết về người tham gia
-                var participantDtos = participants.Select(p => new
-                {
-                    UserId = p.UserId,
-                    AmountPaid = p.AmountPaid
-                }).ToList();
+                if (transactions == null || !transactions.Any())
+                    return NotFound("Không tìm thấy giao dịch nào liên quan đến chuyến đi.");
 
-                // 4. Tính tổng số tiền mà người tham gia đã trả
-                decimal totalAmountCharged = participantDtos.Sum(p => p.AmountPaid);
+                // Tính tổng số tiền đã thanh toán
+                decimal totalAmountPaid = transactions.Sum(t => t.Amount ?? 0);
 
-                // 5. Tính chi phí thực tế dựa trên số người tham gia và giá vé
-                var tripPricings = await _unitOfWork.TripTypePricingRepository.GetPricingByTripTypeAsync(TripType);
-                if (tripPricings == null || !tripPricings.Any())
-                    return BadRequest("Không tìm thấy bảng giá của chuyến đi.");
+                // Lấy bảng giá của chuyến đi từ TripTypePricing
+                var tripTypeId = trip.TripTypeId;
+                var tripPricing = await _unitOfWork.TripTypePricingRepository
+                    .GetPricingForTripAsync(tripTypeId, transactions.Count());
 
-                // Lấy phần tử đầu tiên trong danh sách (nếu có nhiều phần tử)
-                var tripPricing = tripPricings.FirstOrDefault();
                 if (tripPricing == null)
+                {
                     return BadRequest("Không tìm thấy bảng giá của chuyến đi.");
+                }
 
-                decimal totalActualCost = participantDtos.Count * tripPricing.PricePerPerson;
+                // Tính tổng chi phí thực tế cho chuyến đi dựa trên giá MinPerson
+                decimal totalActualCost = tripPricing.PricePerPerson * tripPricing.MinPerson;
 
-                // 6. Kiểm tra xem có cần hoàn tiền không
-                decimal totalRefundAmount = totalAmountCharged - totalActualCost;
+                // Tính phần tiền dư để hoàn lại
+                decimal totalRefundAmount = totalAmountPaid - totalActualCost;
                 if (totalRefundAmount <= 0)
                     return BadRequest("Không cần hoàn tiền vì chi phí thực tế cao hơn hoặc bằng số tiền đã thu.");
 
-                // 7. Tính toán số tiền hoàn lại cho mỗi người tham gia
-                decimal refundPerUser = totalRefundAmount / participantDtos.Count;
+                // Tính toán số tiền hoàn lại cho mỗi người tham gia
+                decimal refundPerUser = totalRefundAmount / transactions.Count();
 
-                // 8. Tiến hành hoàn tiền cho từng người tham gia
-                foreach (var participantDto in participantDtos)
+                // Tiến hành hoàn tiền cho từng người tham gia
+                foreach (var transaction in transactions)
                 {
-                    var wallet = await _unitOfWork.WalletRepository.GetWalletByUserIdAsync(participantDto.UserId);
-                    if (wallet == null) return NotFound($"Không tìm thấy ví cho người dùng {participantDto.UserId}");
+                    var wallet = await _unitOfWork.WalletRepository.GetByIdAsync(transaction.WalletId.Value);
+                    if (wallet == null)
+                    {
+                        return NotFound($"Không tìm thấy ví cho người dùng {transaction.WalletId}");
+                    }
 
                     // Tạo giao dịch hoàn tiền
                     var refundTransaction = new Transaction
                     {
                         WalletId = wallet.Id,
                         Amount = refundPerUser,
-                        TransactionType = "Hoàn tiền",
+                        TransactionType = "Refund",
                         CreatedAt = DateTime.Now,
                         ReferenceId = $"Refund_Trip_{tripId}",
                         Status = 1 // Đang xử lý
@@ -192,7 +209,11 @@ namespace STP.APIService.Controllers
                     await _unitOfWork.WalletRepository.UpdateAsync(wallet);
                 }
 
-                // 9. Lưu tất cả các thay đổi vào cơ sở dữ liệu
+                // Cập nhật trạng thái chuyến đi
+                trip.Status = 3; // Hoàn tất
+                await _unitOfWork.TripRepository.UpdateAsync(trip);
+
+                // Lưu tất cả các thay đổi
                 await _unitOfWork.SaveAsync();
 
                 return Ok(new { message = "Hoàn tiền thành công cho tất cả người tham gia", refundPerUser });

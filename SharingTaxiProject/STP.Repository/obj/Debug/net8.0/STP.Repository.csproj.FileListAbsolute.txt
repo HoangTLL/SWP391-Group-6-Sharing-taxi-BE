@@ -41,6 +41,10 @@ D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\o
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.pdb
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.genruntimeconfig.cache
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\ref\STP.Repository.dll
+D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.deps.json
+D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.runtimeconfig.json
+D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.dll
+D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.pdb
 D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.csproj.AssemblyReference.cache
 D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.GeneratedMSBuildEditorConfig.editorconfig
 D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.AssemblyInfoInputs.cache
@@ -49,9 +53,5 @@ D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Rep
 D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.dll
 D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\refint\STP.Repository.dll
 D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.pdb
-D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.deps.json
-D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.runtimeconfig.json
-D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.dll
-D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.pdb
 D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.genruntimeconfig.cache
 D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\ref\STP.Repository.dll

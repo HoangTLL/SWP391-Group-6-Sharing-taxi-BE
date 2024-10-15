@@ -1,34 +1,66 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using STP.Repository.Models;
-using PMS.Repository.Base; // Tham chiếu đến lớp GenericRepository
-using System.Collections.Generic;
+using PMS.Repository.Base;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace STP.Repository
 {
-    // TripeTypePricingRepository kế thừa từ GenericRepository<TripeTypePricing>
     public class TripTypePricingRepository : GenericRepository<TripTypePricing>
     {
-        // Constructor nhận vào ShareTaxiContext từ UnitOfWork hoặc khởi tạo DbContext
         public TripTypePricingRepository(ShareTaxiContext context) : base(context)
         {
         }
 
-        // Phương thức để lấy danh sách các mức giá theo loại chuyến đi
-        public async Task<List<TripTypePricing>> GetPricingByTripTypeAsync(int tripTypeId)
+        public async Task<TripTypePricing> GetPricingForTripAsync(int tripTypeId, int numberOfParticipants)
         {
             return await _context.TripTypePricings
-                                 .Where(p => p.TripType == tripTypeId)
-                                 .ToListAsync();
+                .Where(ttp => ttp.TripType == tripTypeId &&
+                              ttp.MinPerson <= numberOfParticipants &&
+                              ttp.MaxPerson >= numberOfParticipants)
+                .FirstOrDefaultAsync();
         }
 
-        // Phương thức lấy giá cụ thể theo số lượng người tham gia
-        public async Task<TripTypePricing> GetPricingByParticipantsAsync(int tripTypeId, int numberOfParticipants)
+
+        public async Task<TripTypePricing> GetInitialPricingForTripAsync(int fromAreaId, int toAreaId)
         {
-            return await _context.TripTypePricings
-                                 .Where(p => p.TripType == tripTypeId && p.MinPerson <= numberOfParticipants && p.MaxPerson >= numberOfParticipants)
-                                 .FirstOrDefaultAsync();
+            return await _context.TripTypes
+                .Where(tt => tt.FromAreaId == fromAreaId && tt.ToAreaId == toAreaId)
+                .SelectMany(tt => tt.TripTypePricings)
+                .OrderBy(ttp => ttp.MinPerson)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<(decimal TotalCost, decimal PricePerPerson, int MinPerson, int MaxPerson)> CalculateTripPrice(int tripId)
+        {
+            var trip = await _context.Trips
+                .Include(t => t.TripType)
+                .Include(t => t.Bookings)
+                .FirstOrDefaultAsync(t => t.Id == tripId);
+
+            if (trip == null)
+            {
+                throw new Exception("Không tìm thấy chuyến đi.");
+            }
+
+            int actualParticipants = trip.Bookings.Count;
+
+            // Lấy thông tin giá dựa trên MinPerson của Trip
+            var pricing = await _context.TripTypePricings
+                .Where(ttp => ttp.TripType == trip.TripTypeId && ttp.MinPerson == trip.MinPerson)
+                .FirstOrDefaultAsync();
+
+            if (pricing == null)
+            {
+                throw new Exception("Không tìm thấy giá phù hợp cho chuyến đi.");
+            }
+
+            decimal pricePerPerson = pricing.PricePerPerson;
+            // Tính tổng chi phí dựa trên số người tham gia thực tế, nhưng không ít hơn MinPerson
+            int chargedParticipants = Math.Max(actualParticipants, trip.MinPerson ?? 1);
+            decimal totalCost = pricePerPerson * chargedParticipants;
+
+            return (totalCost, pricePerPerson, trip.MinPerson ?? 1, trip.MaxPerson ?? chargedParticipants);
         }
     }
 }

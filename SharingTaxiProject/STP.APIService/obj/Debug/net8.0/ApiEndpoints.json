@@ -313,11 +313,6 @@
         "Name": "tripId",
         "Type": "System.Int32",
         "IsRequired": false
-      },
-      {
-        "Name": "TripType",
-        "Type": "System.Int32",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []
