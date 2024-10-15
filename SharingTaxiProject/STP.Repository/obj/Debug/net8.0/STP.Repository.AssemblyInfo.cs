@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("STP.Repository")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+86b985f95c9819bcf49cb8920a36a040463a93b1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6aa841e1f20b02c4ceb9efa6a19c869493d6d093")]
 [assembly: System.Reflection.AssemblyProductAttribute("STP.Repository")]
 [assembly: System.Reflection.AssemblyTitleAttribute("STP.Repository")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

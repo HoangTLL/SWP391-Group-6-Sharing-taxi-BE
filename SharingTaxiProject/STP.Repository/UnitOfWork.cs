@@ -1,12 +1,19 @@
-﻿using STP.Repository.Models; // Tham chiếu đến các model
-using STP.Repository.Repository; // Tham chiếu đến các repository như AreaRepository
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Logging;
+using STP.Repository.Models;
+using STP.Repository.Repository;
+using System;
+using System.Data;
+using System.Threading.Tasks;
 
 namespace STP.Repository
 {
-    // Lớp UnitOfWork quản lý các repository và DbContext
     public class UnitOfWork : IDisposable
     {
         private readonly ShareTaxiContext _context;
+        private readonly ILogger _logger;
+        private IDbContextTransaction _transaction;
 
         // Khai báo các repository
         private AreaRepository _areaRepository;
@@ -18,71 +25,99 @@ namespace STP.Repository
         private TripRepository _tripRepository;
         private TripTypeRepository _tripTypeRepository;
         private TripTypePricingRepository _tripTypePricingRepository;
-        private BookingRepository _bookingRepository; // Thêm BookingRepository
+        private BookingRepository _bookingRepository;
 
-
-        // Constructor không tham số: khởi tạo DbContext (ShareTaxiContext)
-        public UnitOfWork() => _context = new ShareTaxiContext();
-
-        // Constructor có tham số: nhận vào một đối tượng ShareTaxiContext
-        public UnitOfWork(ShareTaxiContext context)
+        // Constructor
+        public UnitOfWork(ShareTaxiContext context, ILogger<UnitOfWork> logger)
         {
             _context = context;
+            _logger = logger;
         }
-        // Khởi tạo TripTypePricingRepository
+
+        // Repository properties
         public TripTypePricingRepository TripTypePricingRepository =>
-            _tripTypePricingRepository ??= new TripTypePricingRepository(_context);
-        // Thuộc tính để truy cập TripRepository
+            _tripTypePricingRepository ??= new TripTypePricingRepository(_context, _logger);
+
         public TripRepository TripRepository =>
             _tripRepository ??= new TripRepository(_context);
 
-        // Thuộc tính để truy cập AreaRepository. Sử dụng lazy loading (chỉ khởi tạo khi cần)
-        public AreaRepository AreaRepository
-        {
-            get { return _areaRepository ??= new AreaRepository(_context); }
-            // Nếu _areaRepository chưa được khởi tạo (null), khởi tạo mới với _context
-        }
+        public AreaRepository AreaRepository =>
+            _areaRepository ??= new AreaRepository(_context);
 
-        // Thuộc tính để truy cập UserRepository. Sử dụng lazy loading
-        public UserRepository UserRepository
-        {
-            get { return _userRepository ??= new UserRepository(_context); }
-            // Nếu _userRepository chưa được khởi tạo (null), khởi tạo mới với _context
-        }
+        public UserRepository UserRepository =>
+            _userRepository ??= new UserRepository(_context);
 
-        // Thuộc tính để truy cập LocationRepository. Sử dụng lazy loading
-        public LocationRepository LocationRepository
-        {
-            get { return _locationRepository ??= new LocationRepository(_context); }
-            // Nếu _locationRepository chưa được khởi tạo (null), khởi tạo mới với _context
-        }
+        public LocationRepository LocationRepository =>
+            _locationRepository ??= new LocationRepository(_context);
+
         public WalletRepository WalletRepository =>
-        _walletRepository ??= new WalletRepository(_context);
+            _walletRepository ??= new WalletRepository(_context);
 
         public TransactionRepository TransactionRepository =>
             _transactionRepository ??= new TransactionRepository(_context);
 
         public DepositRepository DepositRepository =>
             _depositRepository ??= new DepositRepository(_context);
-        // Thuộc tính để truy cập TripTypeRepository
+
         public TripTypeRepository TripTypeRepository =>
             _tripTypeRepository ??= new TripTypeRepository(_context);
-        // Thuộc tính để truy cập BookingRepository
-        public BookingRepository BookingRepository
+
+        public BookingRepository BookingRepository =>
+            _bookingRepository ??= new BookingRepository(_context);
+
+        // Transaction methods
+        public async Task<IDbContextTransaction> BeginTransactionAsync()
         {
-            get { return _bookingRepository ??= new BookingRepository(_context); }
+            if (_transaction == null)
+            {
+                _transaction = await _context.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted);
+            }
+            return _transaction;
         }
 
+        public async Task CommitTransactionAsync()
+        {
+            try
+            {
+                await _context.SaveChangesAsync();
+                await _transaction.CommitAsync();
+            }
+            finally
+            {
+                if (_transaction != null)
+                {
+                    await _transaction.DisposeAsync();
+                    _transaction = null;
+                }
+            }
+        }
 
-        // Phương thức lưu thay đổi vào cơ sở dữ liệu
+        public async Task RollbackTransactionAsync()
+        {
+            try
+            {
+                await _transaction?.RollbackAsync();
+            }
+            finally
+            {
+                if (_transaction != null)
+                {
+                    await _transaction.DisposeAsync();
+                    _transaction = null;
+                }
+            }
+        }
+
+        // Save changes
         public async Task<int> SaveAsync()
         {
             return await _context.SaveChangesAsync();
         }
 
-        // Phương thức Dispose để giải phóng tài nguyên
+        // Dispose
         public void Dispose()
         {
+            _transaction?.Dispose();
             _context.Dispose();
         }
     }

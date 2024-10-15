@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore; // Thêm namespace cho EntityFramework
+﻿using Microsoft.EntityFrameworkCore;
 using STP.Repository;
-using STP.Repository.Models; // Namespace chứa ShareTaxiContext
+using STP.Repository.Models;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.Logging;
 
 namespace STP.APIService
 {
@@ -18,28 +19,33 @@ namespace STP.APIService
                     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
                 });
 
-            // Cấu hình CORS cho phép tất cả các frontend
+            // Cấu hình CORS
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
                     builder =>
                     {
-                        builder.AllowAnyOrigin()   // Cho phép tất cả các frontend truy cập
-                               .AllowAnyHeader()   // Cho phép tất cả các header
-                               .AllowAnyMethod();  // Cho phép tất cả các phương thức HTTP
+                        builder.AllowAnyOrigin()
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
                     });
             });
 
-            // Đăng ký DbContext (ShareTaxiContext) với DI container
+            // Đăng ký DbContext
             builder.Services.AddDbContext<ShareTaxiContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
             );
 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            // Cấu hình logging
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
+            builder.Logging.AddConsole();
+            builder.Logging.AddDebug();
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // Đăng ký các dịch vụ khác
+            // Đăng ký UnitOfWork
             builder.Services.AddScoped<UnitOfWork>();
 
             var app = builder.Build();
@@ -52,13 +58,9 @@ namespace STP.APIService
             }
 
             app.UseHttpsRedirection();
-
-            // Sử dụng chính sách CORS cho phép tất cả nguồn
             app.UseCors("AllowAllOrigins");
-
             app.UseAuthorization();
 
-            // ASP.NET Core sẽ tự động tìm và ánh xạ tất cả các controller
             app.MapControllers();
 
             app.Run();

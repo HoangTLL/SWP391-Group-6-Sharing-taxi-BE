@@ -3,25 +3,58 @@ using STP.Repository.Models;
 using PMS.Repository.Base;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace STP.Repository
 {
     public class TripTypePricingRepository : GenericRepository<TripTypePricing>
     {
-        public TripTypePricingRepository(ShareTaxiContext context) : base(context)
+        private readonly ILogger _logger;
+
+        public TripTypePricingRepository(ShareTaxiContext context, ILogger logger) : base(context)
         {
+            _logger = logger;
         }
 
         public async Task<TripTypePricing> GetPricingForTripAsync(int tripTypeId, int numberOfParticipants)
         {
-            return await _context.TripTypePricings
-                .Where(ttp => ttp.TripType == tripTypeId &&
-                              ttp.MinPerson <= numberOfParticipants &&
-                              ttp.MaxPerson >= numberOfParticipants)
-                .FirstOrDefaultAsync();
+            _logger.LogInformation($"Searching pricing for TripTypeId: {tripTypeId}, Participants: {numberOfParticipants}");
+
+            var allPricings = await _context.TripTypePricings
+                .Where(ttp => ttp.TripType == tripTypeId)
+                .ToListAsync();
+
+            _logger.LogInformation($"Found {allPricings.Count} pricing records for TripTypeId: {tripTypeId}");
+
+            foreach (var pricing in allPricings)
+            {
+                _logger.LogInformation($"Pricing: Id={pricing.Id}, MinPerson={pricing.MinPerson}, MaxPerson={pricing.MaxPerson}, Price={pricing.PricePerPerson}");
+            }
+
+            var exactMatch = allPricings
+                .FirstOrDefault(ttp => ttp.MinPerson <= numberOfParticipants && ttp.MaxPerson >= numberOfParticipants);
+
+            if (exactMatch != null)
+            {
+                _logger.LogInformation($"Found exact match: Id={exactMatch.Id}, Price={exactMatch.PricePerPerson}");
+                return exactMatch;
+            }
+
+            // If no exact match, find the closest match
+            var closestMatch = allPricings
+                .OrderBy(ttp => Math.Abs(ttp.MinPerson - numberOfParticipants))
+                .ThenBy(ttp => ttp.PricePerPerson)
+                .FirstOrDefault();
+
+            if (closestMatch != null)
+            {
+                _logger.LogInformation($"Found closest match: Id={closestMatch.Id}, Price={closestMatch.PricePerPerson}");
+                return closestMatch;
+            }
+
+            _logger.LogWarning($"No pricing found for TripTypeId: {tripTypeId}, Participants: {numberOfParticipants}");
+            return null;
         }
-
-
         public async Task<TripTypePricing> GetInitialPricingForTripAsync(int fromAreaId, int toAreaId)
         {
             return await _context.TripTypes

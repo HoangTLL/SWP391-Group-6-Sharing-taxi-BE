@@ -22,7 +22,7 @@ namespace STP.APIService.Controllers
         public async Task<ActionResult<IEnumerable<Area>>> GetAreas()
         {
             // Sử dụng AreaRepository từ UnitOfWork để lấy tất cả các Area một cách bất đồng bộ
-            var areas = await _unitOfWork.AreaRepository.GetAllAsync();
+            var areas = await _unitOfWork.  AreaRepository.GetAllAsync();
             return Ok(areas);
         }
     }

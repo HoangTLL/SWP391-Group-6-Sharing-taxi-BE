@@ -37,4 +37,13 @@ public class TripRepository : GenericRepository<Trip>
         return totalCost;
     
 }
+    public async Task<Trip> GetTripWithPricingAsync(int tripId)
+    {
+        // Lấy thông tin Trip và liên kết với bảng TripType và TripTypePricing
+        return await _context.Trips
+            .Include(t => t.TripType) // Liên kết với TripType
+            .Include(t => t.TripType.TripTypePricings) // Liên kết với TripTypePricing
+            .FirstOrDefaultAsync(t => t.Id == tripId);
+    }
+
 }
