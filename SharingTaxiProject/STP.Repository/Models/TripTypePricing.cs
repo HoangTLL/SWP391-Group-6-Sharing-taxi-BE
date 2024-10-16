@@ -15,6 +15,8 @@ namespace STP.Repository.Models
         public int MaxPerson { get; set; }
         public decimal PricePerPerson { get; set; }
 
+        public int? Status { get; set; }
+
         // Navigation Property
         public virtual TripType TripTypeNavigation { get; set; }
     }

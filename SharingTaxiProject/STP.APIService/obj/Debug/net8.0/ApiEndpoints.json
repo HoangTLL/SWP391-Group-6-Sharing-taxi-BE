@@ -1,23 +1,193 @@
 [
   {
-    "ContainingType": "STP.APIService.Controllers.AreaController",
+    "ContainingType": "STP.API.Controllers.AreaController",
     "Method": "GetAreas",
     "RelativePath": "api/Area",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.AreaController",
+    "Method": "CreateArea",
+    "RelativePath": "api/Area",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[STP.Repository.Models.Area, STP.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "areaDto",
+        "Type": "STP.API.Controllers.AreaCreateDto",
+        "IsRequired": true
       }
-    ]
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.AreaController",
+    "Method": "GetArea",
+    "RelativePath": "api/Area/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.AreaController",
+    "Method": "UpdateArea",
+    "RelativePath": "api/Area/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "areaDto",
+        "Type": "STP.API.Controllers.AreaUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.BookingController",
+    "Method": "CheckTripFull",
+    "RelativePath": "api/Booking/checkTripFull/{tripId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tripId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.BookingController",
+    "Method": "JoinTrip",
+    "RelativePath": "api/Booking/joinTrip",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "STP.API.Controllers.JoinTripRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.BookingController",
+    "Method": "OutTrip",
+    "RelativePath": "api/Booking/outTrip",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "STP.API.Controllers.OutTripRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.BookingController",
+    "Method": "GetUsersInTrip",
+    "RelativePath": "api/Booking/usersInTrip/{tripId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tripId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.CarTripController",
+    "Method": "GetCarTrips",
+    "RelativePath": "api/CarTrip",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.CarTripController",
+    "Method": "CreateCarTrip",
+    "RelativePath": "api/CarTrip",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "carTripDto",
+        "Type": "STP.API.Controllers.CarTripCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.CarTripController",
+    "Method": "GetCarTrip",
+    "RelativePath": "api/CarTrip/{tripId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tripId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.CarTripController",
+    "Method": "UpdateCarTrip",
+    "RelativePath": "api/CarTrip/{tripId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tripId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "carTripDto",
+        "Type": "STP.API.Controllers.CarTripUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "STP.APIService.Controllers.LocationController",
@@ -161,6 +331,141 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TransactionHistoryController",
+    "Method": "GetUserTransactionHistory",
+    "RelativePath": "api/TransactionHistory/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripController",
+    "Method": "GetTripById",
+    "RelativePath": "api/Trip/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripController",
+    "Method": "GetAvailableTrips",
+    "RelativePath": "api/Trip/availableTrips",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripController",
+    "Method": "CreateTrip",
+    "RelativePath": "api/Trip/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "STP.API.Controllers.CreateTripRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripController",
+    "Method": "GetTripList",
+    "RelativePath": "api/Trip/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripController",
+    "Method": "SearchTripsAsync",
+    "RelativePath": "api/Trip/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pickUpLocationId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "dropOffLocationId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "bookingDate",
+        "Type": "System.Nullable\u00601[[System.DateOnly, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "hourInDay",
+        "Type": "System.Nullable\u00601[[System.TimeOnly, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "availableSlots",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripController",
+    "Method": "UpdateTripStatus",
+    "RelativePath": "api/Trip/updateStatus/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "STP.API.Controllers.UpdateTripStatusRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TripCalculatorController",
     "Method": "CalculateTotalCost",
     "RelativePath": "api/TripCalculator/CalculateTotalCost",
@@ -187,6 +492,132 @@
         "Name": "maxPerson",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripTypeController",
+    "Method": "GetTripTypes",
+    "RelativePath": "api/TripType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripTypeController",
+    "Method": "CreateTripType",
+    "RelativePath": "api/TripType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tripTypeDto",
+        "Type": "STP.API.Controllers.TripTypeCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripTypeController",
+    "Method": "GetTripType",
+    "RelativePath": "api/TripType/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripTypeController",
+    "Method": "UpdateTripType",
+    "RelativePath": "api/TripType/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "tripTypeDto",
+        "Type": "STP.API.Controllers.TripTypeUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripTypePricingController",
+    "Method": "GetAllTripTypePricings",
+    "RelativePath": "api/TripTypePricing",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripTypePricingController",
+    "Method": "CreateTripTypePricing",
+    "RelativePath": "api/TripTypePricing",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TripTypePricingDto",
+        "Type": "STP.API.Controllers.TripTypePricingCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripTypePricingController",
+    "Method": "GetTripTypePricingById",
+    "RelativePath": "api/TripTypePricing/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripTypePricingController",
+    "Method": "UpdateTripTypePricing",
+    "RelativePath": "api/TripTypePricing/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "TripTypePricingDto",
+        "Type": "STP.API.Controllers.TripTypePricingUpdateDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -257,6 +688,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.APIService.Controllers.WalletController",
+    "Method": "GetWalletBalance",
+    "RelativePath": "api/Wallet/balance/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using STP.Repository.Models;
 using PMS.Repository.Base;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -55,6 +56,7 @@ namespace STP.Repository
             _logger.LogWarning($"No pricing found for TripTypeId: {tripTypeId}, Participants: {numberOfParticipants}");
             return null;
         }
+
         public async Task<TripTypePricing> GetInitialPricingForTripAsync(int fromAreaId, int toAreaId)
         {
             return await _context.TripTypes
@@ -94,6 +96,42 @@ namespace STP.Repository
             decimal totalCost = pricePerPerson * chargedParticipants;
 
             return (totalCost, pricePerPerson, trip.MinPerson ?? 1, trip.MaxPerson ?? chargedParticipants);
+        }
+
+        public async Task<List<TripTypePricing>> GetAllTripTypePricingsAsync()
+        {
+            return await _context.TripTypePricings
+                .Include(ttp => ttp.TripTypeNavigation)
+                .ToListAsync();
+        }
+
+        public async Task<TripTypePricing> GetTripTypePricingByIdAsync(int id)
+        {
+            return await _context.TripTypePricings
+                .Include(ttp => ttp.TripTypeNavigation)
+                .FirstOrDefaultAsync(ttp => ttp.Id == id);
+        }
+
+        public async Task<bool> TripTypeExistsAsync(int tripTypeId)
+        {
+            return await _context.TripTypes.AnyAsync(tt => tt.Id == tripTypeId);
+        }
+
+        public async Task<List<TripTypePricing>> GetTripTypePricingsByTripTypeAsync(int tripTypeId)
+        {
+            return await _context.TripTypePricings
+                .Where(ttp => ttp.TripType == tripTypeId)
+                .ToListAsync();
+        }
+
+        public async Task<bool> ExistsWithSameParametersAsync(int tripType, int minPerson, int maxPerson, int? excludeId = null)
+        {
+            return await _context.TripTypePricings
+                .AnyAsync(ttp =>
+                    ttp.TripType == tripType &&
+                    ttp.MinPerson == minPerson &&
+                    ttp.MaxPerson == maxPerson &&
+                    (excludeId == null || ttp.Id != excludeId));
         }
     }
 }

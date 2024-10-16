@@ -53,7 +53,8 @@ namespace STP.API.Controllers
                     DateOfBirth = dateOfBirth,                 // Gán ngày sinh đã chuyển đổi sang DateOnly
                     Password = userSignUpDto.Password,         // Hash mật khẩu nếu cần
                     CreatedAt = utcPlus7,                      // Gán thời gian tạo
-                    Role = "user"                              // Gán role mặc định
+                    Role = "user",                             // Gán role mặc định
+                    Status =1
                 };
 
 
@@ -138,32 +139,26 @@ namespace STP.API.Controllers
             if (existingUser == null)
                 return NotFound("User not found.");
 
-            // Check if the new email is already in use
+            // Check if the new email is already in use by another user
             var emailCheck = await _userRepository.GetByEmailAsync(updateUserDto.Email);
             if (emailCheck != null && emailCheck.Id != existingUser.Id)
             {
-                return BadRequest(new
-                {
-                    message = "Email is already registered."
-                });
+                return BadRequest(new { message = "Email is already registered." });
             }
 
-            // Create a new user with updated details
-            var user = await _userRepository.GetByIdAsync(id);
-            if (user == null)
-                return NotFound("User not found.");
-
             // Update user properties
-            user.Name = updateUserDto.Name;
-            user.Email = updateUserDto.Email;
-            user.PhoneNumber = updateUserDto.PhoneNumber;
-            user.Password = updateUserDto.Password; // Remember to hash passwords in production
-            user.DateOfBirth = updateUserDto.DateOfBirth;
-            user.Role = updateUserDto.Role;
+            existingUser.Name = updateUserDto.Name;
+            existingUser.Email = updateUserDto.Email;
+            existingUser.PhoneNumber = updateUserDto.PhoneNumber;
+            existingUser.Password = updateUserDto.Password; // Remember to hash passwords in production
+            existingUser.DateOfBirth = updateUserDto.DateOfBirth;
+            existingUser.Role = updateUserDto.Role;
+            existingUser.Status = updateUserDto.Status; // Update status
+
             try
             {
-                await _userRepository.UpdateAsync(user);
-                return Ok(new { message = "User updated successfully." }); // Return success message
+                await _userRepository.UpdateAsync(existingUser);
+                return Ok(new { message = "User updated successfully." });
             }
             catch (Exception)
             {
@@ -243,6 +238,8 @@ namespace STP.API.Controllers
         public string PhoneNumber { get; set; }
         public string Password { get; set; } // Remember to hash passwords in production
         public DateOnly? DateOfBirth { get; set; }
-        public string Role { get; set; } // New field for updating user role
+        public string Role { get; set; } // Field for updating user role
+        public int? Status { get; set; } // New field for updating user status
     }
+
 }

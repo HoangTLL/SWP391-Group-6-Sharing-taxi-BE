@@ -21,6 +21,8 @@ public partial class User
 
     public string? Role { get; set; }
 
+    public int? Status { get; set; }
+
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
     public virtual ICollection<Wallet> Wallets { get; set; } = new List<Wallet>();

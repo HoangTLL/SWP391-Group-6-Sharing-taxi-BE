@@ -20,6 +20,46 @@ namespace STP.Repository
                 .FirstOrDefaultAsync(t => t.FromAreaId == fromAreaId && t.ToAreaId == toAreaId);
         }
 
-        // Additional methods can be added here as needed
+        public async Task<List<TripType>> GetAllTripTypesWithPricingsAsync()
+        {
+            return await _context.TripTypes
+                .Include(tt => tt.TripTypePricings)
+                .ToListAsync();
+        }
+
+        public async Task<TripType> GetTripTypeWithPricingsByIdAsync(int id)
+        {
+            return await _context.TripTypes
+                .Include(tt => tt.TripTypePricings)
+                .FirstOrDefaultAsync(tt => tt.Id == id);
+        }
+
+        public async Task AddTripTypePricingAsync(TripTypePricing pricing)
+        {
+            await _context.TripTypePricings.AddAsync(pricing);
+        }
+
+        public void UpdateTripTypePricing(TripTypePricing pricing)
+        {
+            _context.TripTypePricings.Update(pricing);
+        }
+
+        public async Task<TripTypePricing> GetTripTypePricingByIdAsync(int id)
+        {
+            return await _context.TripTypePricings.FindAsync(id);
+        }
+
+        public async Task<bool> AreaExistsAsync(int areaId)
+        {
+            return await _context.Areas.AnyAsync(a => a.Id == areaId);
+        }
+
+        public async Task<bool> TripTypeExistsAsync(int fromAreaId, int toAreaId, int? excludeId = null)
+        {
+            return await _context.TripTypes
+                .AnyAsync(tt => tt.FromAreaId == fromAreaId &&
+                                tt.ToAreaId == toAreaId &&
+                                (excludeId == null || tt.Id != excludeId));
+        }
     }
 }

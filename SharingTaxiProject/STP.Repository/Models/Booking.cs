@@ -11,6 +11,7 @@ public partial class Booking
 
     public int? TripId { get; set; }
 
+    public int? Status { get; set; }
     public virtual Trip? Trip { get; set; }
 
     public virtual User? User { get; set; }

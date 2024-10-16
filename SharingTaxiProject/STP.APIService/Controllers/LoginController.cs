@@ -35,6 +35,12 @@ namespace STP.APIService.Controllers
                 return Unauthorized("Invalid email or password");
             }
 
+            // Kiểm tra nếu trạng thái của người dùng không phải là 1 (active), từ chối đăng nhập
+            if (user.Status != 1)
+            {
+                return Unauthorized("Your account is not active. Please contact support.");
+            }
+
             // Nếu thành công, trả về thông báo và ID người dùng
             return Ok(new { message = "Login successful", userId = user.Id, role = user.Role });
         }

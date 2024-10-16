@@ -162,6 +162,37 @@ namespace STP.APIService.Controllers
                 return StatusCode(500, new { message = "An error occurred during payment", error = ex.Message });
             }
         }
+        [HttpGet("balance/{userId}")]
+        public async Task<IActionResult> GetWalletBalance(int userId)
+        {
+            try
+            {
+                // Kiểm tra xem người dùng có tồn tại không
+                var user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
+                if (user == null)
+                {
+                    return NotFound($"User with ID {userId} not found.");
+                }
+                // Lấy ví của người dùng
+                var wallet = await _unitOfWork.WalletRepository.GetWalletByUserIdAsync(userId);
+                if (wallet == null)
+                {
+                    return NotFound($"Wallet for user with ID {userId} not found.");
+                }
+                // Trả về thông tin số dư
+                return Ok(new
+                {
+                    UserId = userId,
+                    Balance = wallet.Balance,
+                    CurrencyCode = wallet.CurrencyCode
+                });
+            }
+            catch (Exception ex)
+            {
+                // Log lỗi ở đây nếu cần
+                return StatusCode(500, $"An error occurred while retrieving the wallet balance: {ex.Message}");
+            }
+        }
 
         // API để hoàn tiền cho chuyến đi
         [HttpPost("RefundTrip")]

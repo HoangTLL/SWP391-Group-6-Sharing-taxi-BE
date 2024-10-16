@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Data;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using STP.Repository.Models;
 using STP.Repository.Repository;
-using System;
-using System.Data;
-using System.Threading.Tasks;
 
 namespace STP.Repository
 {
@@ -26,6 +26,7 @@ namespace STP.Repository
         private TripTypeRepository _tripTypeRepository;
         private TripTypePricingRepository _tripTypePricingRepository;
         private BookingRepository _bookingRepository;
+        private CarTripRepository _carTripRepository;
 
         // Constructor
         public UnitOfWork(ShareTaxiContext context, ILogger<UnitOfWork> logger)
@@ -35,12 +36,6 @@ namespace STP.Repository
         }
 
         // Repository properties
-        public TripTypePricingRepository TripTypePricingRepository =>
-            _tripTypePricingRepository ??= new TripTypePricingRepository(_context, _logger);
-
-        public TripRepository TripRepository =>
-            _tripRepository ??= new TripRepository(_context);
-
         public AreaRepository AreaRepository =>
             _areaRepository ??= new AreaRepository(_context);
 
@@ -59,11 +54,20 @@ namespace STP.Repository
         public DepositRepository DepositRepository =>
             _depositRepository ??= new DepositRepository(_context);
 
+        public TripRepository TripRepository =>
+            _tripRepository ??= new TripRepository(_context);
+
         public TripTypeRepository TripTypeRepository =>
             _tripTypeRepository ??= new TripTypeRepository(_context);
 
+        public TripTypePricingRepository TripTypePricingRepository =>
+            _tripTypePricingRepository ??= new TripTypePricingRepository(_context, _logger);
+
         public BookingRepository BookingRepository =>
             _bookingRepository ??= new BookingRepository(_context);
+
+        public CarTripRepository CarTripRepository =>
+            _carTripRepository ??= new CarTripRepository(_context);
 
         // Transaction methods
         public async Task<IDbContextTransaction> BeginTransactionAsync()

@@ -165,7 +165,7 @@ namespace STP.Repository.Models
                 entity.HasKey(e => e.Id).HasName("PK__Trip__3214EC07C4EB0600");
                 entity.ToTable("Trip");
                 entity.Property(e => e.Id).UseIdentityColumn();
-                entity.Property(e => e.BookingDate).HasColumnType("datetime"); // Ngày đặt
+                entity.Property(e => e.BookingDate).HasColumnType("dateonly"); // Ngày đặt
                 entity.Property(e => e.DropOffLocationId).HasColumnName("dropOffLocationId");
                 entity.Property(e => e.PickUpLocationId).HasColumnName("pickUpLocationId");
                 entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)"); // Giá mỗi chuyến
