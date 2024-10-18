@@ -138,7 +138,6 @@ namespace STP.APIService.Controllers
 
                 // Cập nhật thông tin chuyến đi sau khi thanh toán thành công
                 trip.UnitPrice = pricePerPerson;
-                trip.Status = 2; // Giả sử 2 là trạng thái "Đã thanh toán"
                 await _unitOfWork.TripRepository.UpdateAsync(trip);
 
                 await _unitOfWork.SaveAsync();

@@ -190,6 +190,26 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "STP.API.Controllers.GoogleLoginController",
+    "Method": "GoogleCallback",
+    "RelativePath": "api/GoogleLogin/google-callback",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.GoogleLoginController",
+    "Method": "SignInGoogle",
+    "RelativePath": "api/GoogleLogin/signin-google",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "STP.APIService.Controllers.LocationController",
     "Method": "GetLocations",
     "RelativePath": "api/Location",

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\New folder (2)\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj": {}
+    "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj": {}
   },
   "projects": {
-    "E:\\New folder (2)\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj": {
+    "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\New folder (2)\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
+        "projectUniqueName": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
         "projectName": "STP.APIService",
-        "projectPath": "E:\\New folder (2)\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "E:\\New folder (2)\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\obj\\",
+        "projectPath": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
+        "packagesPath": "C:\\Users\\phucn\\.nuget\\packages\\",
+        "outputPath": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\phucn\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -29,8 +29,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\New folder (2)\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj": {
-                "projectPath": "E:\\New folder (2)\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj"
+              "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj": {
+                "projectPath": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj"
               }
             }
           }
@@ -50,6 +50,18 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.68.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
@@ -74,21 +86,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\New folder (2)\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj": {
+    "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\New folder (2)\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj",
+        "projectUniqueName": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj",
         "projectName": "STP.Repository",
-        "projectPath": "E:\\New folder (2)\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "E:\\New folder (2)\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\obj\\",
+        "projectPath": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj",
+        "packagesPath": "C:\\Users\\phucn\\.nuget\\packages\\",
+        "outputPath": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\phucn\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -159,7 +171,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
