@@ -335,6 +335,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "STP.API.Controllers.PasswordResetController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/PasswordReset/reset-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "STP.API.Controllers.PasswordResetRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "STP.APIService.Controllers.ProfileController",
     "Method": "GetProfile",
     "RelativePath": "api/Profile/{userId}",
