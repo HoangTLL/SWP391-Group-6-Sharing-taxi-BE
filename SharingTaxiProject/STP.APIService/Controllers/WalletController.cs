@@ -311,5 +311,71 @@ namespace STP.APIService.Controllers
                 return StatusCode(500, new { message = "Đã xảy ra lỗi trong quá trình hoàn tiền", error = ex.Message });
             }
         }
+        [HttpPost("RefundOnLeaveTrip")]
+        public async Task<IActionResult> RefundOnLeaveTrip(int userId, int tripId)
+        {
+            using var transaction = await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                _logger.LogInformation($"Processing refund for User {userId} leaving Trip {tripId}");
+
+                var user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
+                if (user == null) return NotFound("User not found.");
+
+                var trip = await _unitOfWork.TripRepository.GetByIdAsync(tripId);
+                if (trip == null) return NotFound("Trip not found.");
+
+                var booking = await _unitOfWork.BookingRepository.GetBookingByUserAndTripAsync(userId, tripId);
+                if (booking == null) return NotFound("Booking not found for this user and trip.");
+
+                if (trip.Status != 1) // Assuming 1 is "Pending" status
+                {
+                    return BadRequest("Cannot refund. Trip is not in a pending state.");
+                }
+
+                var wallet = await _unitOfWork.WalletRepository.GetWalletByUserIdAsync(userId);
+                if (wallet == null) return NotFound("Wallet not found for this user.");
+
+                // Calculate refund amount (you might want to adjust this based on your business logic)
+                decimal refundAmount = trip.UnitPrice ?? 0;
+
+                // Create refund transaction
+                var refundTransaction = new Transaction
+                {
+                    WalletId = wallet.Id,
+                    Amount = refundAmount,
+                    TransactionType = "Refund",
+                    CreatedAt = DateTime.UtcNow,
+                    ReferenceId = $"Refund_LeaveTrip_{tripId}_{userId}",
+                    Status = 1 // Assuming 1 is "Processed" status
+                };
+
+                await _unitOfWork.TransactionRepository.CreateAsync(refundTransaction);
+
+                // Update wallet balance
+                wallet.Balance += refundAmount;
+                await _unitOfWork.WalletRepository.UpdateAsync(wallet);
+
+                // Update booking status
+                booking.Status = 0; // Assuming 0 is "Cancelled" status
+                await _unitOfWork.BookingRepository.UpdateAsync(booking);
+
+                await _unitOfWork.SaveAsync();
+                await transaction.CommitAsync();
+
+                return Ok(new
+                {
+                    message = "Refund processed successfully",
+                    refundAmount = refundAmount,
+                    newBalance = wallet.Balance
+                });
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                _logger.LogError(ex, $"Error processing refund for User {userId} leaving Trip {tripId}");
+                return StatusCode(500, new { message = "An error occurred during the refund process", error = ex.Message });
+            }
+        }
     }
 }

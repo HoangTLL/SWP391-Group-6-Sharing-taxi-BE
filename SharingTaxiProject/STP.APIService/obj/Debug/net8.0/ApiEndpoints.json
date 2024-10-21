@@ -786,6 +786,27 @@
   },
   {
     "ContainingType": "STP.APIService.Controllers.WalletController",
+    "Method": "RefundOnLeaveTrip",
+    "RelativePath": "api/Wallet/RefundOnLeaveTrip",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "tripId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.APIService.Controllers.WalletController",
     "Method": "RefundTrip",
     "RelativePath": "api/Wallet/RefundTrip",
     "HttpMethod": "POST",

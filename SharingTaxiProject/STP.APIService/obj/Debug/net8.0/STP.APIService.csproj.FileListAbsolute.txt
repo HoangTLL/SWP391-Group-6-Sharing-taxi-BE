@@ -381,3 +381,6 @@ C:\Users\Admin\Documents\New folder\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiPr
 C:\Users\Admin\Documents\New folder\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Debug\net8.0\STP.APIService.pdb
 C:\Users\Admin\Documents\New folder\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Debug\net8.0\STP.APIService.genruntimeconfig.cache
 C:\Users\Admin\Documents\New folder\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Debug\net8.0\ref\STP.APIService.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\MailKit.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\MimeKit.dll
