@@ -124,6 +124,97 @@ namespace STP.Repository
                 })
                 .ToListAsync<object>();
         }
+        public async Task<List<object>> GetTripsByUserIdAsync(int userId)
+        {
+            return await _context.Trips
+                .Where(t => t.Bookings.Any(b => b.UserId == userId))
+                .Include(t => t.PickUpLocation)
+                .Include(t => t.DropOffLocation)
+                .Select(t => new
+                {
+                    t.Id,
+                    PickUpLocationName = t.PickUpLocation.Name,
+                    DropOffLocationName = t.DropOffLocation.Name,
+                    t.ToAreaId,
+                    t.MaxPerson,
+                    t.MinPerson,
+                    t.UnitPrice,
+                    t.BookingDate,
+                    t.HourInDay,
+                    t.Status
+                })
+                .ToListAsync<object>();
+        }
+        public async Task<object> GetTripStatisticsAsync()
+        {
+            var threeMonthsAgo = DateOnly.FromDateTime(DateTime.Now.AddMonths(-3));
+
+            // Lấy thông tin chuyến đi được tạo nhiều nhất (địa điểm đón và trả khách)
+            var mostCreatedTrip = await _context.Trips
+                .Where(t => t.BookingDate >= threeMonthsAgo)
+                .GroupBy(t => new { t.PickUpLocationId, t.DropOffLocationId })
+                .Select(g => new
+                {
+                    From = g.First().PickUpLocation.Name,
+                    To = g.First().DropOffLocation.Name,
+                    Count = g.Count()
+                })
+                .OrderByDescending(g => g.Count)
+                .FirstOrDefaultAsync();
+
+            // Số chuyến đi tạo mỗi tháng trong 3 tháng gần nhất
+            var tripsPerMonth = await _context.Trips
+                .Where(t => t.BookingDate >= threeMonthsAgo)
+                .GroupBy(t => new { t.BookingDate.Value.Year, t.BookingDate.Value.Month })
+                .Select(g => new
+                {
+                    Year = g.Key.Year,
+                    Month = g.Key.Month,
+                    Count = g.Count()
+                })
+                .ToListAsync();
+
+            // Số chuyến đi bị hủy (status = 0) mỗi tháng trong 3 tháng gần nhất
+            var inactiveTripsPerMonth = await _context.Trips
+                .Where(t => t.Status == 0 && t.BookingDate >= threeMonthsAgo)
+                .GroupBy(t => new { t.BookingDate.Value.Year, t.BookingDate.Value.Month })
+                .Select(g => new
+                {
+                    Year = g.Key.Year,
+                    Month = g.Key.Month,
+                    Count = g.Count()
+                })
+                .ToListAsync();
+
+            // Thống kê số lượng người tham gia theo tháng
+            var participantsPerMonth = await _context.Bookings
+            .Include(b => b.Trip)
+            .Where(b => b.Trip.BookingDate >= threeMonthsAgo
+                     && b.Trip.Status == 1)  // Chỉ lấy các trip có status = 1
+            .GroupBy(b => new
+            {
+                Year = b.Trip.BookingDate.Value.Year,
+                Month = b.Trip.BookingDate.Value.Month
+            })
+            .Select(g => new
+            {
+                Year = g.Key.Year,
+                Month = g.Key.Month,
+                TotalParticipants = g.Count()
+            })
+            .ToListAsync();
+
+            return new
+            {
+                MostCreatedTrip = mostCreatedTrip,
+                TripsPerMonth = tripsPerMonth,
+                InactiveTripsPerMonth = inactiveTripsPerMonth,
+                ParticipantsStatistics = participantsPerMonth
+            };
+        }
+
+
+
 
         // Method to retrieve all trips with location names
         public async Task<List<object>> GetAllTripsAsync()
