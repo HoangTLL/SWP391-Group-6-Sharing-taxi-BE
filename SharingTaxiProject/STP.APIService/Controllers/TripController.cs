@@ -115,6 +115,24 @@ namespace STP.API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        //lich su chuyen di cua user
+        [HttpGet("TripJoined/{userId}")]
+        public async Task<IActionResult> GetTripsByUserId(int userId)
+        {
+            var trips = await _unitOfWork.TripRepository.GetTripsByUserIdAsync(userId);
+            if (trips == null || !trips.Any())
+            {
+                return NotFound("No trips found for this user.");
+            }
+            return Ok(trips);
+        }
+        //thong ke
+        [HttpGet("TripStatistics")]
+        public async Task<IActionResult> GetTripStatistics()
+        {
+            var statistics = await _unitOfWork.TripRepository.GetTripStatisticsAsync();
+            return Ok(statistics);
+        }
 
         [HttpPatch("updateStatus/{id}")]
         public async Task<IActionResult> UpdateTripStatus(int id, [FromBody] UpdateTripStatusRequest request)
