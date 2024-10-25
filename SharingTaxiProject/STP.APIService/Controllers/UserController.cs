@@ -186,7 +186,8 @@ namespace STP.API.Controllers
                     Password = u.Password,
                     DateOfBirth = u.DateOfBirth,
                     CreatedAt = u.CreatedAt,
-                    Role = u.Role
+                    Role = u.Role,
+                    Status = u.Status
                 }).ToList();
 
                 // Return the list of user DTOs
@@ -211,6 +212,7 @@ namespace STP.API.Controllers
         public DateOnly? DateOfBirth { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string? Role { get; set; }
+        public int? Status { get; set; }
     }
 
     public class UserSignUpDto

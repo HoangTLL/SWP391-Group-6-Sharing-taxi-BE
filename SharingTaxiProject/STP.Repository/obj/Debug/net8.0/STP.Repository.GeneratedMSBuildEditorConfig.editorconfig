@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = STP.Repository
-build_property.ProjectDir = D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\
+build_property.ProjectDir = C:\Users\Admin\Documents\New folder\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

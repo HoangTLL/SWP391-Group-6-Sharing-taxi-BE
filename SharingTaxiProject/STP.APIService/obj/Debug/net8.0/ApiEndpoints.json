@@ -482,6 +482,32 @@
   },
   {
     "ContainingType": "STP.API.Controllers.TripController",
+    "Method": "GetTripsByUserId",
+    "RelativePath": "api/Trip/TripJoined/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripController",
+    "Method": "GetTripStatistics",
+    "RelativePath": "api/Trip/TripStatistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.API.Controllers.TripController",
     "Method": "UpdateTripStatus",
     "RelativePath": "api/Trip/updateStatus/{id}",
     "HttpMethod": "PATCH",
