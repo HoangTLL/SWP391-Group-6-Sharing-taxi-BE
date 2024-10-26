@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("STP.APIService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+782d7e29b6a1783b1b8a22d39d387eec744efd88")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b57fa0dfaef6b2deaa5718ea844cde382f745fb4")]
 [assembly: System.Reflection.AssemblyProductAttribute("STP.APIService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("STP.APIService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

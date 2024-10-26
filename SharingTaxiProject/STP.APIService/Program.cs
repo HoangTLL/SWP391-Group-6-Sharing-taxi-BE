@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.OAuth;
 
 namespace STP.APIService
 {
@@ -16,6 +17,8 @@ namespace STP.APIService
     {
         public static void Main(string[] args)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -28,13 +31,12 @@ namespace STP.APIService
             // Cấu hình CORS
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowSpecificOrigins",
-                    builder =>
-                    {
-                        builder.WithOrigins("https://localhost:5204", "http://localhost:5204")
-                   .AllowAnyHeader()
-                   .AllowAnyMethod();
-                    });
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
             });
 
             // Cấu hình xác thực
@@ -44,11 +46,19 @@ namespace STP.APIService
                 options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
             })
             .AddCookie()
-            .AddGoogle(googleOptions =>
+            .AddGoogle(options =>
             {
-                googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
-                googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
-                googleOptions.CallbackPath = "/api/GoogleLogin/google-callback";
+                options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+                options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+                options.CallbackPath = "/api/GoogleLogin/google-callback";
+                options.Events = new OAuthEvents
+                {
+                    OnRedirectToAuthorizationEndpoint = context =>
+                    {
+                        context.Response.Redirect(context.RedirectUri);
+                        return Task.CompletedTask;
+                    }
+                };
             })
             .AddJwtBearer(options =>
             {
@@ -128,11 +138,13 @@ namespace STP.APIService
 
             // Đăng ký UnitOfWork
             builder.Services.AddScoped<UnitOfWork>();
+            // Đăng ký WalletRepository
+            builder.Services.AddScoped<WalletRepository>();
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
@@ -143,19 +155,13 @@ namespace STP.APIService
                 });
             }
 
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseHttpsRedirection();
-            }
             app.UseRouting();
-            app.UseCors("AllowSpecificOrigins");
-
+            app.UseCors("AllowAll");
             // Thêm middleware xác thực và ủy quyền
+            app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.MapControllers();
-
             app.Run();
         }
     }
