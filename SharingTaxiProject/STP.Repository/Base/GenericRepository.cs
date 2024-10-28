@@ -77,8 +77,9 @@ namespace PMS.Repository.Base
         // Phương thức bất đồng bộ để lấy tất cả các thực thể (T)
         public async Task<List<T>> GetAllAsync()
         {
-            return await _context.Set<T>().ToListAsync(); // Trả về danh sách các thực thể (T)
+            return await _context.Set<T>().AsNoTracking().ToListAsync(); // Tối ưu để không lấy dữ liệu liên quan
         }
+
 
         // Phương thức bất đồng bộ để tạo mới một thực thể (T)
         public async Task<int> CreateAsync(T entity)

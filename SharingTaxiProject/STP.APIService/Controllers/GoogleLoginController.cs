@@ -47,6 +47,9 @@ namespace STP.API.Controllers
                     return BadRequest("Google authentication failed.");
                 }
 
+                // Thêm header
+                Response.Headers.Add("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+
                 var googleUser = result.Principal;
                 var email = googleUser.FindFirstValue(ClaimTypes.Email);
                 var name = googleUser.FindFirstValue(ClaimTypes.Name);
@@ -60,7 +63,24 @@ namespace STP.API.Controllers
 
                 var token = GenerateJwtToken(user);
 
-                return Ok(new { token, userId = user.Id, email = user.Email, name = user.Name });
+                // Trả về HTML với script để đóng popup và gửi data
+                return Content($@"
+            <html>
+            <body>
+                <script>
+                    if (window.opener) {{
+                        window.opener.postMessage({{ 
+                            token: '{token}',
+                            userId: {user.Id},
+                            email: '{email}',
+                            name: '{name}'
+                        }}, '*');
+                        window.close();
+                    }}
+                </script>
+            </body>
+            </html>
+        ", "text/html");
             }
             catch (Exception ex)
             {
@@ -68,7 +88,6 @@ namespace STP.API.Controllers
                 return StatusCode(500, "An error occurred during authentication.");
             }
         }
-
         private async Task<User> CreateNewUser(string email, string name)
         {
             var user = new User

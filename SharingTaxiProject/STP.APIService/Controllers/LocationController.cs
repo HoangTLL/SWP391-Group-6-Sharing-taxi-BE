@@ -19,10 +19,18 @@ namespace STP.APIService.Controllers
 
         // API để lấy danh sách các điểm Location
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Location>>> GetLocations()
+        public async Task<ActionResult<IEnumerable<object>>> GetLocations()
         {
             var locations = await _unitOfWork.LocationRepository.GetAllAsync();
-            return Ok(locations);
+            var result = locations.Select(l => new
+            {
+                Id = l.Id,
+                Name = l.Name,
+                Lat = l.Lat,
+                Lon = l.Lon,
+                AreaId = l.AreaId
+            });
+            return Ok(result);
         }
 
         // API để tìm kiếm các điểm Location theo tên

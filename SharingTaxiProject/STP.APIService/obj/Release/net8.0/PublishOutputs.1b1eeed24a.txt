@@ -8,6 +8,7 @@ D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\o
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Azure.Core.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Azure.Identity.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\BouncyCastle.Cryptography.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Castle.Core.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Google.Apis.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Google.Apis.Auth.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Google.Apis.Core.dll
@@ -18,8 +19,15 @@ D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\o
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Proxies.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Relational.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Caching.Memory.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.DependencyInjection.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Logging.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Options.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.Identity.Client.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.Identity.Client.Extensions.Msal.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.Abstractions.dll

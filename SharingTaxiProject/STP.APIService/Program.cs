@@ -28,16 +28,18 @@ namespace STP.APIService
                     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
                 });
 
-            // Cấu hình CORS
+            // Cấu hình CORS cho phép tất cả
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>
                 {
-                    builder.AllowAnyOrigin()
-                           .AllowAnyMethod()
-                           .AllowAnyHeader();
+                    builder.AllowAnyOrigin() // Cho phép tất cả các nguồn
+                           .AllowAnyHeader() // Cho phép tất cả các header
+                           .AllowAnyMethod(); // Cho phép tất cả các phương thức (GET, POST, v.v.)
+                           
                 });
             });
+
 
             // Cấu hình xác thực
             builder.Services.AddAuthentication(options =>
@@ -45,21 +47,47 @@ namespace STP.APIService
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
             })
+
             .AddCookie()
+            // cấu hình Google Authentication
             .AddGoogle(options =>
+{
+             options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+            options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+             options.CallbackPath = "/api/GoogleLogin/google-callback";
+            options.Scope.Add("profile");
+            options.Scope.Add("email");
+
+    // Cập nhật xử lý redirect
+    options.Events = new OAuthEvents
+    {
+        OnRedirectToAuthorizationEndpoint = context =>
+        {
+            string redirectUri;
+            var originUrl = context.Request.Headers["Origin"].FirstOrDefault() ??
+                          $"{context.Request.Scheme}://{context.Request.Host}";
+
+            if (originUrl.Contains("localhost"))
             {
-                options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
-                options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
-                options.CallbackPath = "/api/GoogleLogin/google-callback";
-                options.Events = new OAuthEvents
-                {
-                    OnRedirectToAuthorizationEndpoint = context =>
-                    {
-                        context.Response.Redirect(context.RedirectUri);
-                        return Task.CompletedTask;
-                    }
-                };
-            })
+                redirectUri = "http://localhost:5174/api/GoogleLogin/google-callback";
+            }
+            else
+            {
+                redirectUri = "http://sharetaxi.somee.com/api/GoogleLogin/google-callback";
+            }
+
+            var authEndpoint = context.RedirectUri.Split('?')[0];
+            var queryString = context.RedirectUri.Split('?')[1];
+            var newRedirectUri = $"{authEndpoint}?{queryString.Replace(
+                Uri.EscapeDataString(context.RedirectUri),
+                Uri.EscapeDataString(redirectUri)
+            )}";
+
+            context.Response.Redirect(newRedirectUri);
+            return Task.CompletedTask;
+        }
+    };
+})
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -156,11 +184,11 @@ namespace STP.APIService
             }
 
             app.UseRouting();
-            app.UseCors("AllowAll");
-            // Thêm middleware xác thực và ủy quyền
+            app.UseCors("AllowAll"); // Bật CORS với cấu hình cho phép tất cả các nguồn
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.MapControllers();
             app.Run();
         }

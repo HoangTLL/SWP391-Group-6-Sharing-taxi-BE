@@ -384,3 +384,11 @@ C:\Users\Admin\Documents\New folder\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiPr
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\MailKit.dll
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\MimeKit.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\Castle.Core.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Proxies.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Debug\net8.0\Microsoft.Extensions.Options.dll

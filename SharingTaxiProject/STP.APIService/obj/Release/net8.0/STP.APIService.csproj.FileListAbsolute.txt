@@ -83,3 +83,11 @@ D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\o
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\STP.APIService.pdb
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\STP.APIService.genruntimeconfig.cache
 D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\obj\Release\net8.0\ref\STP.APIService.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Release\net8.0\Castle.Core.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Release\net8.0\Microsoft.EntityFrameworkCore.Proxies.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Release\net8.0\Microsoft.Extensions.Caching.Memory.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Release\net8.0\Microsoft.Extensions.DependencyInjection.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Release\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Release\net8.0\Microsoft.Extensions.Logging.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Release\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.APIService\bin\Release\net8.0\Microsoft.Extensions.Options.dll

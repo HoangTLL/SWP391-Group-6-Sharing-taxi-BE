@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.Proxies;
 
 namespace STP.Repository.Models
 {
@@ -52,7 +53,10 @@ namespace STP.Repository.Models
 
         // Phương thức cấu hình DbContext với chuỗi kết nối
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
+        {
+            optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseLazyLoadingProxies(false); // Vô hiệu hóa lazy loading
+        }
 
         // Phương thức thiết lập cấu hình của các bảng trong cơ sở dữ liệu
         protected override void OnModelCreating(ModelBuilder modelBuilder)
