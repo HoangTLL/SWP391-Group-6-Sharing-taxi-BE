@@ -17,22 +17,27 @@ namespace STP.API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// API to check if a trip is full based on the trip ID.
+        /// </summary>
+        /// <param name="tripId">ID of the trip to check.</param>
+        /// <returns>Whether the trip is full and current bookings count.</returns>
         [HttpGet("checkTripFull/{tripId}")]
         public async Task<IActionResult> CheckTripFull(int tripId)
         {
             try
             {
-                // Retrieve trip details
+                // BƯỚC 1: Truy vấn thông tin chuyến đi từ database
                 var trip = await _unitOfWork.TripRepository.GetTripByIdAsync(tripId);
                 if (trip == null)
                 {
                     return NotFound("Trip not found.");
                 }
 
-                // Count the number of current bookings for the trip
+                // BƯỚC 2: Đếm số lượng booking hiện tại của chuyến đi
                 var currentBookingsCount = await _unitOfWork.BookingRepository.CountBookingsByTripIdAsync(tripId);
 
-                // Check if the trip is full
+                // BƯỚC 3: Kiểm tra chuyến đi đã đầy chưa
                 bool isFull = currentBookingsCount >= trip.MaxPerson;
                 return Ok(new { isFull, currentBookingsCount, maxPerson = trip.MaxPerson });
             }
@@ -42,6 +47,11 @@ namespace STP.API.Controllers
             }
         }
 
+        /// <summary>
+        /// API to allow a user to join a trip.
+        /// </summary>
+        /// <param name="request">Details of the user and trip to join.</param>
+        /// <returns>Success or error message upon joining the trip.</returns>
         [HttpPost("joinTrip")]
         public async Task<IActionResult> JoinTrip([FromBody] JoinTripRequest request)
         {
@@ -52,14 +62,14 @@ namespace STP.API.Controllers
 
             try
             {
-                // Check if the user is already booked for this trip
+                // BƯỚC 1: Kiểm tra nếu người dùng đã tham gia chuyến đi này
                 var existingBooking = await _unitOfWork.BookingRepository.GetBookingByUserAndTripAsync(request.UserId, request.TripId);
                 if (existingBooking != null)
                 {
                     return BadRequest("User has already joined this trip.");
                 }
 
-                // Create a new booking
+                // BƯỚC 2: Tạo một booking mới cho chuyến đi
                 var booking = new Booking
                 {
                     UserId = request.UserId,
@@ -67,6 +77,7 @@ namespace STP.API.Controllers
                     Status = 1
                 };
 
+                // BƯỚC 3: Lưu booking vào database
                 var result = await _unitOfWork.BookingRepository.CreateBookingAsync(booking);
                 if (result)
                 {
@@ -80,28 +91,34 @@ namespace STP.API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
+        /// <summary>
+        /// API to retrieve the list of users in a specified trip.
+        /// </summary>
+        /// <param name="tripId">ID of the trip to retrieve users for.</param>
+        /// <returns>List of users in the trip.</returns>
         [HttpGet("usersInTrip/{tripId}")]
         public async Task<IActionResult> GetUsersInTrip(int tripId)
         {
             try
             {
-                // Retrieve the trip by ID
+                // BƯỚC 1: Truy vấn thông tin chuyến đi từ database
                 var trip = await _unitOfWork.TripRepository.GetTripByIdAsync(tripId);
                 if (trip == null)
                 {
                     return NotFound("Trip not found.");
                 }
 
-                // Retrieve all bookings for the trip
+                // BƯỚC 2: Lấy danh sách tất cả booking cho chuyến đi
                 var bookings = await _unitOfWork.BookingRepository.GetBookingsByTripIdAsync(tripId);
 
-                // Check if there are bookings for the trip
+                // BƯỚC 3: Kiểm tra nếu không có booking nào trong chuyến đi
                 if (bookings == null || !bookings.Any())
                 {
                     return Ok(new { message = "No users have joined this trip." });
                 }
 
-                // Retrieve the list of user names from the bookings
+                // BƯỚC 4: Lấy danh sách tên người dùng từ booking
                 var usersInTrip = bookings.Select(b => new { b.User.Id, b.User.Name }).ToList();
 
                 return Ok(usersInTrip);
@@ -112,7 +129,11 @@ namespace STP.API.Controllers
             }
         }
 
-
+        /// <summary>
+        /// API to allow a user to leave a trip.
+        /// </summary>
+        /// <param name="request">Details of the user and trip to leave.</param>
+        /// <returns>Success or error message upon leaving the trip.</returns>
         [HttpDelete("outTrip")]
         public async Task<IActionResult> OutTrip([FromBody] OutTripRequest request)
         {
@@ -123,12 +144,14 @@ namespace STP.API.Controllers
 
             try
             {
+                // BƯỚC 1: Kiểm tra nếu booking của người dùng cho chuyến đi tồn tại
                 var booking = await _unitOfWork.BookingRepository.GetBookingByUserAndTripAsync(request.UserId, request.TripId);
                 if (booking == null)
                 {
                     return NotFound("Booking not found.");
                 }
 
+                // BƯỚC 2: Xóa booking khỏi database
                 var result = await _unitOfWork.BookingRepository.DeleteBookingAsync(booking);
                 if (result)
                 {
@@ -141,7 +164,7 @@ namespace STP.API.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception
+                // Xử lý lỗi và ghi log
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }

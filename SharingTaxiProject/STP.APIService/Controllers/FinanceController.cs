@@ -12,25 +12,40 @@ public class FinanceController : ControllerBase
         _walletRepository = walletRepository;
     }
 
-    // API: Tính tổng số tiền nạp vào
+    /// <summary>
+    /// API to calculate the total amount of deposits.
+    /// </summary>
+    /// <returns>Total deposits as a decimal value.</returns>
     [HttpGet("total-deposits")]
     public async Task<decimal> GetTotalDepositsAsync()
     {
-        return await _walletRepository.GetTotalDepositsAsync(); // Sử dụng phương thức từ WalletRepository
+        // BƯỚC 1: Lấy tổng số tiền nạp từ WalletRepository
+        return await _walletRepository.GetTotalDepositsAsync();
     }
 
-    // API: Tính doanh thu
+    /// <summary>
+    /// API to calculate total revenue.
+    /// </summary>
+    /// <returns>Total revenue as a decimal value.</returns>
     [HttpGet("total-revenue")]
     public async Task<ActionResult<decimal>> GetTotalRevenue()
     {
+        // BƯỚC 1: Lấy tổng doanh thu từ WalletRepository
         var totalRevenue = await _walletRepository.GetTotalRevenueAsync();
+
+        // BƯỚC 2: Trả về tổng doanh thu
         return Ok(totalRevenue);
     }
 
-    // API: Top người dùng nạp tiền
+    /// <summary>
+    /// API to retrieve the top depositors based on deposit amount.
+    /// </summary>
+    /// <param name="topCount">The number of top depositors to retrieve.</param>
+    /// <returns>List of top depositors with details.</returns>
     [HttpGet("top-depositors")]
     public async Task<List<object>> GetTopDepositorsAsync([FromQuery] int topCount)
     {
-        return await _walletRepository.GetTopDepositorsAsync(topCount); // Sử dụng phương thức từ WalletRepository
+        // BƯỚC 1: Lấy danh sách người nạp tiền hàng đầu từ WalletRepository
+        return await _walletRepository.GetTopDepositorsAsync(topCount);
     }
 }

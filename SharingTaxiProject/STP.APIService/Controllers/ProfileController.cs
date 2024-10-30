@@ -5,38 +5,50 @@ using System.Threading.Tasks;
 
 namespace STP.APIService.Controllers
 {
+    /// <summary>
+    /// API controller for managing user profiles.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ProfileController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;
 
-        // Inject UnitOfWork để quản lý các thao tác với cơ sở dữ liệu
+        /// <summary>
+        /// Constructor for ProfileController, injects UnitOfWork for data operations.
+        /// </summary>
+        /// <param name="unitOfWork">UnitOfWork instance for database access.</param>
         public ProfileController(UnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
-        // API lấy thông tin hồ sơ người dùng theo userId
+        /// <summary>
+        /// API to retrieve a user's profile based on their user ID.
+        /// </summary>
+        /// <param name="userId">ID of the user whose profile is requested.</param>
+        /// <returns>User profile information or a not found message if the user does not exist.</returns>
         [HttpGet("{userId}")]
         public async Task<ActionResult> GetProfile(int userId)
         {
-            // Tìm kiếm người dùng dựa trên userId
+            // BƯỚC 1: Tìm kiếm người dùng dựa trên userId
             var user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
 
-            // Kiểm tra xem người dùng có tồn tại không
+            // BƯỚC 2: Kiểm tra nếu không tìm thấy người dùng, trả về lỗi 404
             if (user == null)
             {
                 return NotFound("User not found.");
             }
 
-            // Trả về thông tin cần thiết của người dùng
+            // BƯỚC 3: Tạo DTO với thông tin cần thiết của người dùng
             var userProfile = new
             {
                 Email = user.Email,
                 Name = user.Name,
+                Phone = user.PhoneNumber,
                 DateOfBirth = user.DateOfBirth,
                 CreatedAt = user.CreatedAt
             };
 
-            return Ok(userProfile); // Trả về đối tượng đã xử lý
+            // BƯỚC 4: Trả về đối tượng thông tin người dùng
+            return Ok(userProfile);
         }
     }
 }

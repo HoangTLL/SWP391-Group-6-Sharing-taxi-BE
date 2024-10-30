@@ -26,21 +26,6 @@ C:\Users\phucn\Source\Repos\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\ST
 C:\Users\phucn\Source\Repos\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.pdb
 C:\Users\phucn\Source\Repos\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.genruntimeconfig.cache
 C:\Users\phucn\Source\Repos\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\ref\STP.Repository.dll
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.deps.json
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.runtimeconfig.json
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.dll
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.pdb
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.csproj.AssemblyReference.cache
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.GeneratedMSBuildEditorConfig.editorconfig
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.AssemblyInfoInputs.cache
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.AssemblyInfo.cs
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.csproj.CoreCompileInputs.cache
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.sourcelink.json
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.dll
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\refint\STP.Repository.dll
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.pdb
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.genruntimeconfig.cache
-D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\ref\STP.Repository.dll
 D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.deps.json
 D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.runtimeconfig.json
 D:\Share_Taxi\Back up\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.dll
@@ -70,3 +55,18 @@ C:\Users\Admin\Documents\New folder\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiPr
 C:\Users\Admin\Documents\New folder\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.pdb
 C:\Users\Admin\Documents\New folder\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.genruntimeconfig.cache
 C:\Users\Admin\Documents\New folder\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\ref\STP.Repository.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.deps.json
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.runtimeconfig.json
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\bin\Debug\net8.0\STP.Repository.pdb
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.csproj.AssemblyReference.cache
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.AssemblyInfoInputs.cache
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.AssemblyInfo.cs
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.csproj.CoreCompileInputs.cache
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.sourcelink.json
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\refint\STP.Repository.dll
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.pdb
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\STP.Repository.genruntimeconfig.cache
+D:\Share_Taxi\SWP391-Group-6-Sharing-taxi-BE\SharingTaxiProject\STP.Repository\obj\Debug\net8.0\ref\STP.Repository.dll

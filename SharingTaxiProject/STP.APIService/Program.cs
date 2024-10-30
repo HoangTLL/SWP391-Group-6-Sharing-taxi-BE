@@ -21,86 +21,39 @@ namespace STP.APIService
 
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Thêm dịch vụ Controllers và cấu hình JSON
             builder.Services.AddControllers()
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
                 });
 
-            // Cấu hình CORS cho phép tất cả
+            // Cấu hình CORS cho phép từ localhost:5173
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowAll", builder =>
+                options.AddPolicy("AllowLocalhost5173", builder =>
                 {
-                    builder.AllowAnyOrigin() // Cho phép tất cả các nguồn
+                    builder.WithOrigins("http://localhost:5173") // Cho phép từ frontend trên localhost:5173
                            .AllowAnyHeader() // Cho phép tất cả các header
-                           .AllowAnyMethod(); // Cho phép tất cả các phương thức (GET, POST, v.v.)
-                           
+                           .AllowAnyMethod() // Cho phép tất cả các phương thức (GET, POST, v.v.)
+                           .AllowCredentials(); // Cho phép gửi thông tin xác thực nếu cần thiết
                 });
             });
 
-
-            // Cấu hình xác thực
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-            })
-
-            .AddCookie()
-            // cấu hình Google Authentication
-            .AddGoogle(options =>
-{
-             options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
-            options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
-             options.CallbackPath = "/api/GoogleLogin/google-callback";
-            options.Scope.Add("profile");
-            options.Scope.Add("email");
-
-    // Cập nhật xử lý redirect
-    options.Events = new OAuthEvents
-    {
-        OnRedirectToAuthorizationEndpoint = context =>
-        {
-            string redirectUri;
-            var originUrl = context.Request.Headers["Origin"].FirstOrDefault() ??
-                          $"{context.Request.Scheme}://{context.Request.Host}";
-
-            if (originUrl.Contains("localhost"))
-            {
-                redirectUri = "http://localhost:5174/api/GoogleLogin/google-callback";
-            }
-            else
-            {
-                redirectUri = "http://sharetaxi.somee.com/api/GoogleLogin/google-callback";
-            }
-
-            var authEndpoint = context.RedirectUri.Split('?')[0];
-            var queryString = context.RedirectUri.Split('?')[1];
-            var newRedirectUri = $"{authEndpoint}?{queryString.Replace(
-                Uri.EscapeDataString(context.RedirectUri),
-                Uri.EscapeDataString(redirectUri)
-            )}";
-
-            context.Response.Redirect(newRedirectUri);
-            return Task.CompletedTask;
-        }
-    };
-})
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
+            // Cấu hình xác thực (Google OAuth và JWT)
+            builder.Services
+                .AddAuthentication(options =>
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                    ValidAudience = builder.Configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-                };
-            });
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+                })
+                .AddCookie()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+                    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+                    options.SaveTokens = true; // Lưu token để sử dụng sau này
+                });
 
             // Đăng ký DbContext
             builder.Services.AddDbContext<ShareTaxiContext>(options =>
@@ -113,13 +66,13 @@ namespace STP.APIService
             builder.Logging.AddConsole();
             builder.Logging.AddDebug();
 
+            // Đăng ký Swagger
             builder.Services.AddEndpointsApiExplorer();
-
-            // Cấu hình Swagger
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "STP API", Version = "v1" });
 
+                // Cấu hình OAuth cho Swagger
                 c.AddSecurityDefinition("google_auth", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.OAuth2,
@@ -131,14 +84,15 @@ namespace STP.APIService
                             TokenUrl = new Uri("https://oauth2.googleapis.com/token"),
                             Scopes = new Dictionary<string, string>
                             {
-                                {"openid", "OpenID"},
-                                {"profile", "Profile"},
-                                {"email", "Email"}
+                                { "openid", "OpenID" },
+                                { "profile", "Profile" },
+                                { "email", "Email" }
                             }
                         }
                     }
                 });
 
+                // Cấu hình JWT cho Swagger
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme.",
@@ -148,6 +102,7 @@ namespace STP.APIService
                     Scheme = "Bearer"
                 });
 
+                // Cấu hình yêu cầu bảo mật cho các endpoint
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
@@ -164,14 +119,13 @@ namespace STP.APIService
                 });
             });
 
-            // Đăng ký UnitOfWork
+            // Đăng ký các lớp xử lý dữ liệu
             builder.Services.AddScoped<UnitOfWork>();
-            // Đăng ký WalletRepository
             builder.Services.AddScoped<WalletRepository>();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Cấu hình HTTP request pipeline
             if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
             {
                 app.UseSwagger();
@@ -183,9 +137,10 @@ namespace STP.APIService
                 });
             }
 
-            app.UseRouting();
-            app.UseCors("AllowAll"); // Bật CORS với cấu hình cho phép tất cả các nguồn
+            // Middleware
             app.UseHttpsRedirection();
+            app.UseCors("AllowLocalhost5173"); // Áp dụng chính sách CORS
+
             app.UseAuthentication();
             app.UseAuthorization();
 

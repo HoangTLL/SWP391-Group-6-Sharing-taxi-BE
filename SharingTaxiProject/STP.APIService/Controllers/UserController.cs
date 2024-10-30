@@ -54,7 +54,7 @@ namespace STP.API.Controllers
                     Password = userSignUpDto.Password,         // Hash mật khẩu nếu cần
                     CreatedAt = utcPlus7,                      // Gán thời gian tạo
                     Role = "user",                             // Gán role mặc định
-                    Status =1
+                    Status = 1
                 };
 
 
@@ -98,37 +98,26 @@ namespace STP.API.Controllers
             if (updateUserDto == null)
                 return BadRequest("User data is null.");
 
-            var existingUser = await _userRepository.GetByEmailAsync(updateUserDto.Email);
-            if (existingUser != null)
-            {
-                return BadRequest(new
-                {
-                    message = "Email is already registered.",
-                });
-            }
-
             var user = await _userRepository.GetByIdAsync(id);
             if (user == null)
                 return NotFound("User not found.");
 
-            // Update user properties
             user.Name = updateUserDto.Name;
-            user.Email = updateUserDto.Email;
             user.PhoneNumber = updateUserDto.PhoneNumber;
-            user.Password = updateUserDto.Password; // Remember to hash passwords in production
+            user.Password = updateUserDto.Password;
             user.DateOfBirth = updateUserDto.DateOfBirth;
 
             try
             {
                 await _userRepository.UpdateAsync(user);
-                return Ok(new { message = "User updated successfully." }); // Return success message
+                return Ok(new { message = "User updated successfully." });
             }
             catch (Exception)
             {
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
-        // PUT: api/User/UpdateUserAdmin/{id}
+
         [HttpPut("UpdateUserAdmin/{id}")]
         public async Task<IActionResult> UpdateUserAdmin(int id, [FromBody] UpdateUserDtoForAdmin updateUserDto)
         {
@@ -139,21 +128,12 @@ namespace STP.API.Controllers
             if (existingUser == null)
                 return NotFound("User not found.");
 
-            // Check if the new email is already in use by another user
-            var emailCheck = await _userRepository.GetByEmailAsync(updateUserDto.Email);
-            if (emailCheck != null && emailCheck.Id != existingUser.Id)
-            {
-                return BadRequest(new { message = "Email is already registered." });
-            }
-
-            // Update user properties
             existingUser.Name = updateUserDto.Name;
-            existingUser.Email = updateUserDto.Email;
             existingUser.PhoneNumber = updateUserDto.PhoneNumber;
-            existingUser.Password = updateUserDto.Password; // Remember to hash passwords in production
+            existingUser.Password = updateUserDto.Password;
             existingUser.DateOfBirth = updateUserDto.DateOfBirth;
             existingUser.Role = updateUserDto.Role;
-            existingUser.Status = updateUserDto.Status; // Update status
+            existingUser.Status = updateUserDto.Status;
 
             try
             {
@@ -165,6 +145,7 @@ namespace STP.API.Controllers
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
+
 
 
         // GET: api/UserList
@@ -228,20 +209,20 @@ namespace STP.API.Controllers
     public class UpdateUserDto
     {
         public string Name { get; set; }
-        public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Password { get; set; }
         public DateOnly? DateOfBirth { get; set; }
     }
+
     public class UpdateUserDtoForAdmin
     {
         public string Name { get; set; }
-        public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string Password { get; set; } // Remember to hash passwords in production
+        public string Password { get; set; }
         public DateOnly? DateOfBirth { get; set; }
         public string Role { get; set; } // Field for updating user role
         public int? Status { get; set; } // New field for updating user status
     }
+
 
 }

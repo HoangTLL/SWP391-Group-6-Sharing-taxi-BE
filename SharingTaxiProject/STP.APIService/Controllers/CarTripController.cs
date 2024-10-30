@@ -22,12 +22,17 @@ namespace STP.API.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// API to retrieve all car trips.
+        /// </summary>
+        /// <returns>List of car trips with basic information.</returns>
         // GET: api/CarTrip
         [HttpGet]
         public async Task<IActionResult> GetCarTrips()
         {
             _logger.LogInformation("Getting all car trips.");
 
+            // BƯỚC 1: Lấy tất cả car trip từ database
             var carTrips = (await _unitOfWork.CarTripRepository.GetAllAsync())
                 .Select(ct => new CarTripDto
                 {
@@ -40,13 +45,20 @@ namespace STP.API.Controllers
                 })
                 .ToList();
 
+            // BƯỚC 2: Trả về danh sách car trip
             return Ok(carTrips);
         }
 
+        /// <summary>
+        /// API to retrieve a car trip by trip ID.
+        /// </summary>
+        /// <param name="tripId">ID of the car trip to retrieve.</param>
+        /// <returns>Details of the specified car trip.</returns>
         // GET: api/CarTrip/{tripId}
         [HttpGet("{tripId}")]
         public async Task<IActionResult> GetCarTrip(int? tripId)
         {
+            // BƯỚC 1: Kiểm tra tính hợp lệ của tripId
             if (!tripId.HasValue)
             {
                 return BadRequest("TripId must be provided.");
@@ -54,6 +66,7 @@ namespace STP.API.Controllers
 
             _logger.LogInformation($"Getting car trip with TripId: {tripId}");
 
+            // BƯỚC 2: Truy vấn car trip từ database
             var carTrip = await _unitOfWork.CarTripRepository.GetByTripIdAsync(tripId.Value);
             if (carTrip == null)
             {
@@ -61,6 +74,7 @@ namespace STP.API.Controllers
                 return NotFound("Car trip not found.");
             }
 
+            // BƯỚC 3: Tạo DTO và trả về kết quả
             var carTripDto = new CarTripDto
             {
                 TripId = carTrip.TripId,
@@ -74,10 +88,16 @@ namespace STP.API.Controllers
             return Ok(carTripDto);
         }
 
+        /// <summary>
+        /// API to create a new car trip.
+        /// </summary>
+        /// <param name="carTripDto">The details of the car trip to create.</param>
+        /// <returns>The created car trip information.</returns>
         // POST: api/CarTrip
         [HttpPost]
         public async Task<IActionResult> CreateCarTrip([FromBody] CarTripCreateDto carTripDto)
         {
+            // BƯỚC 1: Kiểm tra tính hợp lệ của mô hình
             if (!ModelState.IsValid)
             {
                 _logger.LogWarning("Invalid model state while creating a car trip.");
@@ -88,6 +108,7 @@ namespace STP.API.Controllers
             {
                 _logger.LogInformation($"Creating new car trip for TripId: {carTripDto.TripId}");
 
+                // BƯỚC 2: Tạo đối tượng car trip mới từ DTO
                 var carTrip = new CarTrip
                 {
                     TripId = carTripDto.TripId,
@@ -98,9 +119,11 @@ namespace STP.API.Controllers
                     Status = carTripDto.Status
                 };
 
+                // BƯỚC 3: Lưu car trip vào database
                 await _unitOfWork.CarTripRepository.AddAsync(carTrip);
                 await _unitOfWork.SaveAsync();
 
+                // BƯỚC 4: Trả về car trip đã tạo
                 return CreatedAtAction(nameof(GetCarTrip), new { tripId = carTrip.TripId }, carTrip);
             }
             catch (Exception ex)
@@ -110,10 +133,17 @@ namespace STP.API.Controllers
             }
         }
 
+        /// <summary>
+        /// API to update an existing car trip by trip ID.
+        /// </summary>
+        /// <param name="tripId">ID of the car trip to update.</param>
+        /// <param name="carTripDto">The updated details of the car trip.</param>
+        /// <returns>The updated car trip information.</returns>
         // PUT: api/CarTrip/{tripId}
         [HttpPut("{tripId}")]
         public async Task<IActionResult> UpdateCarTrip(int? tripId, [FromBody] CarTripUpdateDto carTripDto)
         {
+            // BƯỚC 1: Kiểm tra tính hợp lệ của tripId và mô hình
             if (!tripId.HasValue)
             {
                 return BadRequest("TripId must be provided.");
@@ -128,6 +158,8 @@ namespace STP.API.Controllers
             try
             {
                 _logger.LogInformation($"Updating car trip with TripId: {tripId}");
+
+                // BƯỚC 2: Truy vấn car trip hiện có từ database
                 var existingCarTrip = await _unitOfWork.CarTripRepository.GetByTripIdAsync(tripId.Value);
                 if (existingCarTrip == null)
                 {
@@ -135,15 +167,18 @@ namespace STP.API.Controllers
                     return NotFound("Car trip not found.");
                 }
 
+                // BƯỚC 3: Cập nhật thông tin car trip từ DTO
                 existingCarTrip.DriverName = carTripDto.DriverName;
                 existingCarTrip.DriverPhone = carTripDto.DriverPhone;
                 existingCarTrip.PlateNumber = carTripDto.PlateNumber;
                 existingCarTrip.ArrivedTime = carTripDto.ArrivedTime;
                 existingCarTrip.Status = carTripDto.Status;
 
+                // BƯỚC 4: Lưu các thay đổi vào database
                 _unitOfWork.CarTripRepository.Update(existingCarTrip);
                 await _unitOfWork.SaveAsync();
 
+                // BƯỚC 5: Trả về car trip đã cập nhật
                 return Ok(existingCarTrip);
             }
             catch (Exception ex)

@@ -87,78 +87,193 @@ namespace STP.APIService.Controllers
             }
         }
 
-        // API để thanh toán cho chuyến đi
+        /// <summary>
+        /// API để xử lý thanh toán cho một chuyến đi
+        /// Cho phép thanh toán đồng thời cho nhiều người trong cùng một chuyến
+        /// </summary>
+        /// <param name = "tripId" > ID của chuyến đi cần thanh toán</param>
+        /// <returns>Kết quả thanh toán kèm thông tin chi tiết</returns>
         [HttpPost("PayForTrip")]
         public async Task<IActionResult> PayForTrip(int tripId)
         {
             try
             {
-                // Lấy thông tin chuyến đi từ cơ sở dữ liệu
+                // BƯỚC 1: KIỂM TRA VÀ LẤY THÔNG TIN CHUYẾN ĐI
+                // 1.1: Truy vấn thông tin chuyến đi từ database theo tripId
                 var trip = await _unitOfWork.TripRepository.GetByIdAsync(tripId);
+                // Nếu không tìm thấy chuyến đi, trả về lỗi 404
                 if (trip == null) return NotFound("Trip not found.");
 
-                // Lấy danh sách các đặt chỗ liên quan đến chuyến đi
+                // 1.2: Lấy tất cả các booking (đặt chỗ) của chuyến đi này
                 var bookings = await _unitOfWork.BookingRepository.GetBookingsByTripIdAsync(tripId);
+                // Kiểm tra nếu không có booking nào hoặc danh sách rỗng
                 if (bookings == null || !bookings.Any()) return NotFound("No bookings found for this trip.");
 
-                // Tính toán tổng chi phí và giá mỗi người dựa trên số lượng người tham gia
-                var (totalCost, pricePerPerson, minPerson, maxPerson) = await _unitOfWork.TripTypePricingRepository.CalculateTripPrice(tripId);
+                // BƯỚC 2: TÍNH TOÁN CHI PHÍ VÀ SỐ NGƯỜI
+                // 2.1: Lấy thông tin giá và số lượng người từ bảng TripTypePricing
+                var (totalCost,                // Tổng chi phí chuyến đi
+                    pricePerPerson,            // Giá tiền trên mỗi người
+                    minPerson,                 // Số người tối thiểu
+                    maxPerson                  // Số người tối đa
+                    ) = await _unitOfWork.TripTypePricingRepository.CalculateTripPrice(tripId);
 
-                int actualParticipants = bookings.Count();
-                int chargedParticipants = Math.Max(actualParticipants, minPerson); // Số người tối thiểu phải thanh toán
+                // 2.2: Tính toán số người thực tế và số người cần tính phí
+                int actualParticipants = bookings.Count();  // Số người thực tế đăng ký
+                                                            // Số người tính phí sẽ là max giữa số người thực tế và số người tối thiểu
+                int chargedParticipants = Math.Max(actualParticipants, minPerson);
 
-                // Xử lý thanh toán cho từng đặt chỗ
-                foreach (var booking in bookings)
+                // BƯỚC 3: LỌC CÁC BOOKING CẦN THANH TOÁN
+                // 3.1: Chỉ lấy những booking có status = 1 (đang chờ thanh toán)
+                var pendingBookings = bookings.Where(b => b.Status == 1).ToList();
+
+                // 3.2: Kiểm tra nếu không có booking nào cần thanh toán
+                if (!pendingBookings.Any())
                 {
-                    var wallet = await _unitOfWork.WalletRepository.GetWalletByUserIdAsync(booking.UserId.Value);
-                    if (wallet == null) return NotFound($"Wallet not found for user {booking.UserId}.");
-
-                    // Kiểm tra số dư của người dùng
-                    if (wallet.Balance < pricePerPerson)
-                    {
-                        return BadRequest($"Insufficient balance for user {booking.UserId}.");
-                    }
-
-                    // Trừ tiền từ ví của người dùng
-                    wallet.Balance -= pricePerPerson;
-                    await _unitOfWork.WalletRepository.UpdateAsync(wallet);
-
-                    // Tạo transaction cho giao dịch thanh toán
-                    var transaction = new Transaction
-                    {
-                        WalletId = wallet.Id,
-                        Amount = pricePerPerson,
-                        TransactionType = "Payment",
-                        CreatedAt = DateTime.Now,
-                        ReferenceId = $"Trip_{tripId}",
-                        Status = 1
-                    };
-                    await _unitOfWork.TransactionRepository.CreateAsync(transaction);
+                    return BadRequest("No pending payments found for this trip.");
                 }
 
-                // Cập nhật thông tin chuyến đi sau khi thanh toán thành công
-                trip.UnitPrice = pricePerPerson;
-                await _unitOfWork.TripRepository.UpdateAsync(trip);
+                // BƯỚC 4: KHỞI TẠO DANH SÁCH THEO DÕI KẾT QUẢ
+                // 4.1: Danh sách lưu các booking đã xử lý thanh toán thành công
+                var processedBookings = new List<Booking>();
+                // 4.2: Danh sách lưu các booking thất bại và lý do
+                var failedBookings = new List<(Booking booking, string reason)>();
 
-                await _unitOfWork.SaveAsync();
-
-                // Trả về thông báo thành công và thông tin chi tiết về thanh toán
-                return Ok(new
+                // BƯỚC 5: XỬ LÝ THANH TOÁN TỪNG BOOKING
+                foreach (var booking in pendingBookings)
                 {
-                    message = "Payment successful",
-                    totalAmountCharged = totalCost,
-                    pricePerPerson,
-                    actualParticipants,
-                    chargedParticipants,
-                    minPerson,
-                    maxPerson,
-                    potentialRefund = chargedParticipants > actualParticipants ? (chargedParticipants - actualParticipants) * pricePerPerson : 0
-                });
+                    try
+                    {
+                        // 5.1: Kiểm tra UserId có tồn tại
+                        if (!booking.UserId.HasValue)
+                        {
+                            // Nếu không có UserId, thêm vào danh sách thất bại
+                            failedBookings.Add((booking, "User ID is missing"));
+                            continue; // Bỏ qua booking này, xử lý booking tiếp theo
+                        }
+
+                        // 5.2: Lấy thông tin ví của user
+                        var wallet = await _unitOfWork.WalletRepository.GetWalletByUserIdAsync(booking.UserId.Value);
+                        if (wallet == null)
+                        {
+                            // Nếu không tìm thấy ví, thêm vào danh sách thất bại
+                            failedBookings.Add((booking, "Wallet not found"));
+                            continue;
+                        }
+
+                        // 5.3: Kiểm tra số dư trong ví
+                        if (wallet.Balance < pricePerPerson)
+                        {
+                            // Nếu số dư không đủ, thêm vào danh sách thất bại
+                            failedBookings.Add((booking, "Insufficient balance"));
+                            continue;
+                        }
+
+                        // 5.4: Trừ tiền từ ví
+                        wallet.Balance -= pricePerPerson;
+                        await _unitOfWork.WalletRepository.UpdateAsync(wallet);
+
+                        // 5.5: Tạo transaction ghi nhận giao dịch thanh toán
+                        var transaction = new Transaction
+                        {
+                            WalletId = wallet.Id,           // ID của ví
+                            Amount = pricePerPerson,        // Số tiền thanh toán
+                            TransactionType = "Payment",    // Loại giao dịch: Thanh toán
+                            CreatedAt = DateTime.Now,       // Thời gian tạo giao dịch
+                            ReferenceId = $"Trip_{tripId}", // Mã tham chiếu đến chuyến đi
+                            Status = 1                      // Trạng thái: Thành công
+                        };
+                        await _unitOfWork.TransactionRepository.CreateAsync(transaction);
+
+                        // 5.6: Cập nhật trạng thái booking sang đã thanh toán (status = 2)
+                        booking.Status = 2;  // 2 = Đã thanh toán
+                        await _unitOfWork.BookingRepository.UpdateAsync(booking);
+
+                        // 5.7: Thêm booking vào danh sách xử lý thành công
+                        processedBookings.Add(booking);
+                    }
+                    catch (Exception ex)
+                    {
+                        // 5.8: Xử lý lỗi cho từng booking riêng biệt
+                        failedBookings.Add((booking, ex.Message));
+                        // Ghi log lỗi
+                        _logger.LogError($"Error processing payment for booking {booking.Id}: {ex.Message}");
+                    }
+                }
+
+                // BƯỚC 6: CẬP NHẬT THÔNG TIN CHUYẾN ĐI
+                if (processedBookings.Any())
+                {
+                    // 6.1: Cập nhật giá trên mỗi người vào thông tin chuyến đi
+                    trip.UnitPrice = pricePerPerson;
+                    await _unitOfWork.TripRepository.UpdateAsync(trip);
+                    // 6.2: Lưu tất cả thay đổi vào database
+                    await _unitOfWork.SaveAsync();
+                }
+
+                // BƯỚC 7: CHUẨN BỊ THÔNG TIN PHẢN HỒI
+                var response = new
+                {
+                    // 7.1: Thông báo kết quả chung
+                    message = processedBookings.Any() ? "Payments processed" : "No payments were processed",
+
+                    // 7.2: Danh sách các thanh toán thành công
+                    successfulPayments = processedBookings.Select(b => new
+                    {
+                        bookingId = b.Id,
+                        userId = b.UserId,
+                        amount = pricePerPerson
+                    }).ToList(),
+
+                    // 7.3: Danh sách các thanh toán thất bại
+                    failedPayments = failedBookings.Select(f => new
+                    {
+                        bookingId = f.booking.Id,
+                        userId = f.booking.UserId,
+                        reason = f.reason
+                    }).ToList(),
+
+                    // 7.4: Thông tin tổng kết
+                    summary = new
+                    {
+                        totalProcessed = processedBookings.Count,    // Số lượng xử lý thành công
+                        totalFailed = failedBookings.Count,         // Số lượng xử lý thất bại
+                        pricePerPerson,                            // Giá trên mỗi người
+                        actualParticipants,                        // Số người thực tế
+                        chargedParticipants,                       // Số người tính phí
+                        minPerson,                                 // Số người tối thiểu
+                        maxPerson,                                 // Số người tối đa
+                                                                   // Số tiền có thể hoàn lại nếu số người tính phí > số người thực tế
+                        potentialRefund = chargedParticipants > actualParticipants ?
+                            (chargedParticipants - actualParticipants) * pricePerPerson : 0
+                    }
+                };
+
+                // BƯỚC 8: TRẢ VỀ KẾT QUẢ VỚI STATUS CODE PHÙ HỢP
+                // 8.1: Nếu có cả thanh toán thành công và thất bại
+                if (processedBookings.Any() && failedBookings.Any())
+                {
+                    return StatusCode(207, response); // 207 Multi-Status
+                }
+                // 8.2: Nếu tất cả đều thất bại
+                else if (failedBookings.Any() && !processedBookings.Any())
+                {
+                    return BadRequest(response); // 400 Bad Request
+                }
+                // 8.3: Nếu tất cả đều thành công
+                else
+                {
+                    return Ok(response); // 200 OK
+                }
             }
             catch (Exception ex)
             {
-                // Xử lý ngoại lệ và trả về lỗi
-                return StatusCode(500, new { message = "An error occurred during payment", error = ex.Message });
+                // BƯỚC 9: XỬ LÝ LỖI TỔNG THỂ CỦA API
+                // Ghi log lỗi và trả về lỗi 500 Internal Server Error
+                return StatusCode(500, new
+                {
+                    message = "An error occurred during payment",
+                    error = ex.Message
+                });
             }
         }
         [HttpGet("balance/{userId}")]

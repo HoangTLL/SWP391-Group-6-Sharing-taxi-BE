@@ -9,11 +9,16 @@ using STP.Repository;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace STP.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class GoogleLoginController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;
@@ -26,68 +31,31 @@ namespace STP.API.Controllers
             _configuration = configuration;
             _logger = logger;
         }
-
         [HttpGet("signin-google")]
         public IActionResult SignInGoogle()
         {
-            _logger.LogInformation("Initiating Google Sign-In");
             var properties = new AuthenticationProperties { RedirectUri = Url.Action("google-callback") };
             return Challenge(properties, GoogleDefaults.AuthenticationScheme);
         }
+
+
         [HttpGet("google-callback")]
         public async Task<IActionResult> GoogleCallback()
         {
-            try
-            {
-                var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+            var authenticateResult = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-                if (!result.Succeeded)
-                {
-                    _logger.LogWarning("Google authentication failed.");
-                    return BadRequest("Google authentication failed.");
-                }
+            if (!authenticateResult.Succeeded)
+                return BadRequest("Google authentication failed.");
 
-                // Thêm header
-                Response.Headers.Add("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+            // Lấy thông tin người dùng từ kết quả xác thực
+            var email = authenticateResult.Principal.FindFirst(ClaimTypes.Email)?.Value;
+            var name = authenticateResult.Principal.FindFirst(ClaimTypes.Name)?.Value;
 
-                var googleUser = result.Principal;
-                var email = googleUser.FindFirstValue(ClaimTypes.Email);
-                var name = googleUser.FindFirstValue(ClaimTypes.Name);
-
-                var user = await _unitOfWork.UserRepository.GetByEmailAsync(email);
-
-                if (user == null)
-                {
-                    user = await CreateNewUser(email, name);
-                }
-
-                var token = GenerateJwtToken(user);
-
-                // Trả về HTML với script để đóng popup và gửi data
-                return Content($@"
-            <html>
-            <body>
-                <script>
-                    if (window.opener) {{
-                        window.opener.postMessage({{ 
-                            token: '{token}',
-                            userId: {user.Id},
-                            email: '{email}',
-                            name: '{name}'
-                        }}, '*');
-                        window.close();
-                    }}
-                </script>
-            </body>
-            </html>
-        ", "text/html");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occurred during Google authentication.");
-                return StatusCode(500, "An error occurred during authentication.");
-            }
+            // Gửi thông tin về frontend hoặc tạo token JWT để trả về
+            return Ok(new { email, name });
         }
+
+
         private async Task<User> CreateNewUser(string email, string name)
         {
             var user = new User
@@ -141,5 +109,10 @@ namespace STP.API.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+    }
+
+    public class GoogleCredentialRequest
+    {
+        public string Credential { get; set; }
     }
 }
