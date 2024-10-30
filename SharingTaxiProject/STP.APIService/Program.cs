@@ -31,12 +31,12 @@ namespace STP.APIService
             // Cấu hình CORS cho phép từ localhost:5173
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowLocalhost5173", builder =>
+                options.AddPolicy("AllowAll", builder =>
                 {
-                    builder.WithOrigins("http://localhost:5173") // Cho phép từ frontend trên localhost:5173
-                           .AllowAnyHeader() // Cho phép tất cả các header
-                           .AllowAnyMethod() // Cho phép tất cả các phương thức (GET, POST, v.v.)
-                           .AllowCredentials(); // Cho phép gửi thông tin xác thực nếu cần thiết
+                    builder.AllowAnyOrigin()       // Cho phép tất cả các nguồn gốc
+                           .AllowAnyHeader()       // Cho phép tất cả các header
+                           .AllowAnyMethod();       // Cho phép tất cả các phương thức (GET, POST, v.v.)
+                           
                 });
             });
 
@@ -139,7 +139,7 @@ namespace STP.APIService
 
             // Middleware
             app.UseHttpsRedirection();
-            app.UseCors("AllowLocalhost5173"); // Áp dụng chính sách CORS
+            app.UseCors("AllowAll"); 
 
             app.UseAuthentication();
             app.UseAuthorization();

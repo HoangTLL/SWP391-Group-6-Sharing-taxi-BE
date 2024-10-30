@@ -3,28 +3,48 @@
   "WorkspaceRootPath": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\stp.apiservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\stp.apiservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\tripcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\tripcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\walletcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\walletcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\stp.apiservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\stp.apiservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\financecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\financecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\transactionhistorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\transactionhistorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.repository\\repository\\triprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|solutionrelative:stp.repository\\repository\\triprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\tripcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\tripcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\tripetypepricingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\tripetypepricingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\passwordresetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -43,10 +63,6 @@
       "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\googlelogincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\financecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\financecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\controllers\\cartripcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\cartripcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -59,15 +75,7 @@
       "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\controllers\\areacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\phucn\\Downloads\\ProfileController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.apiservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A22AA30A-6D19-43DE-BA19-F528C40D5AB8}|STP.APIService\\STP.APIService.csproj|solutionrelative:stp.apiservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.repository\\models\\sharetaxicontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -93,10 +101,6 @@
       "RelativeMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|solutionrelative:stp.repository\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.repository\\repository\\triprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|solutionrelative:stp.repository\\repository\\triprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|d:\\share_taxi\\swp391-group-6-sharing-taxi-be\\sharingtaxiproject\\stp.repository\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CE3B024F-9C2E-4E4C-ABC4-9B1219C51C38}|STP.Repository\\STP.Repository.csproj|solutionrelative:stp.repository\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -112,76 +116,89 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TransactionHistoryController.cs",
-              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\TransactionHistoryController.cs",
-              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\TransactionHistoryController.cs",
-              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\TransactionHistoryController.cs",
-              "RelativeToolTip": "STP.APIService\\Controllers\\TransactionHistoryController.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAAFsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-30T07:06:41.257Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PasswordResetController.cs",
-              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\PasswordResetController.cs",
-              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\PasswordResetController.cs",
-              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\PasswordResetController.cs",
-              "RelativeToolTip": "STP.APIService\\Controllers\\PasswordResetController.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAAAHkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-30T07:05:19.418Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TripController.cs",
-              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\TripController.cs",
-              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\TripController.cs",
-              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\TripController.cs",
-              "RelativeToolTip": "STP.APIService\\Controllers\\TripController.cs",
-              "ViewState": "AgIAAI8AAAAAAAAAAAAgwKcAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-24T09:12:41.702Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\UserController.cs",
-              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\UserController.cs",
-              "RelativeToolTip": "STP.APIService\\Controllers\\UserController.cs",
-              "ViewState": "AgIAAMwAAAAAAAAAAAA5wOQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T16:53:11.826Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "WalletController.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\WalletController.cs",
               "RelativeDocumentMoniker": "STP.APIService\\Controllers\\WalletController.cs",
               "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\WalletController.cs",
               "RelativeToolTip": "STP.APIService\\Controllers\\WalletController.cs",
-              "ViewState": "AgIAAM4BAAAAAAAAAAAAAPABAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAmwGAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-30T06:31:07.125Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
+              "Title": "TripRepository.cs",
+              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Repository\\TripRepository.cs",
+              "RelativeDocumentMoniker": "STP.Repository\\Repository\\TripRepository.cs",
+              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Repository\\TripRepository.cs",
+              "RelativeToolTip": "STP.Repository\\Repository\\TripRepository.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAYwCUAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T09:09:41.217Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Program.cs",
+              "RelativeDocumentMoniker": "STP.APIService\\Program.cs",
+              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Program.cs",
+              "RelativeToolTip": "STP.APIService\\Program.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAwwCUAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T08:31:07.195Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TransactionHistoryController.cs",
+              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\TransactionHistoryController.cs",
+              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\TransactionHistoryController.cs",
+              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\TransactionHistoryController.cs",
+              "RelativeToolTip": "STP.APIService\\Controllers\\TransactionHistoryController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T07:06:41.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProfileController.cs",
+              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\ProfileController.cs",
+              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\ProfileController.cs",
+              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\ProfileController.cs",
+              "RelativeToolTip": "STP.APIService\\Controllers\\ProfileController.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAA+wDYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T09:01:50.855Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FinanceController.cs",
+              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\FinanceController.cs",
+              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\FinanceController.cs",
+              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\FinanceController.cs",
+              "RelativeToolTip": "STP.APIService\\Controllers\\FinanceController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T07:01:45.007Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "STP.APIService.csproj",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\STP.APIService.csproj",
               "RelativeDocumentMoniker": "STP.APIService\\STP.APIService.csproj",
@@ -194,7 +211,70 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\UserController.cs",
+              "RelativeToolTip": "STP.APIService\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAMwAAAAAAAAAAAA5wOQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-25T16:53:11.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "TripController.cs",
+              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\TripController.cs",
+              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\TripController.cs",
+              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\TripController.cs",
+              "RelativeToolTip": "STP.APIService\\Controllers\\TripController.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAGcAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T09:12:41.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TripeTypePricingController.cs",
+              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\TripeTypePricingController.cs",
+              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\TripeTypePricingController.cs",
+              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\TripeTypePricingController.cs",
+              "RelativeToolTip": "STP.APIService\\Controllers\\TripeTypePricingController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T08:30:46.015Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PasswordResetController.cs",
+              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\PasswordResetController.cs",
+              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\PasswordResetController.cs",
+              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\PasswordResetController.cs",
+              "RelativeToolTip": "STP.APIService\\Controllers\\PasswordResetController.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAHkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T07:05:19.418Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\appsettings.json",
+              "RelativeDocumentMoniker": "STP.APIService\\appsettings.json",
+              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\appsettings.json",
+              "RelativeToolTip": "STP.APIService\\appsettings.json",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-26T08:28:42.372Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "LoginController.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "STP.APIService\\Controllers\\LoginController.cs",
@@ -207,20 +287,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "FinanceController.cs",
-              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\FinanceController.cs",
-              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\FinanceController.cs",
-              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\FinanceController.cs",
-              "RelativeToolTip": "STP.APIService\\Controllers\\FinanceController.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-30T07:01:45.007Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "CarTripController.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\CarTripController.cs",
               "RelativeDocumentMoniker": "STP.APIService\\Controllers\\CarTripController.cs",
@@ -233,7 +300,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "BookingController.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\BookingController.cs",
               "RelativeDocumentMoniker": "STP.APIService\\Controllers\\BookingController.cs",
@@ -246,20 +313,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ProfileController.cs",
-              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\ProfileController.cs",
-              "RelativeDocumentMoniker": "STP.APIService\\Controllers\\ProfileController.cs",
-              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\ProfileController.cs",
-              "RelativeToolTip": "STP.APIService\\Controllers\\ProfileController.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAuwDYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T09:01:50.855Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "AreaController.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\AreaController.cs",
               "RelativeDocumentMoniker": "STP.APIService\\Controllers\\AreaController.cs",
@@ -272,7 +326,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "GoogleLoginController.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\GoogleLoginController.cs",
               "RelativeDocumentMoniker": "STP.APIService\\Controllers\\GoogleLoginController.cs",
@@ -285,7 +339,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "LocationController.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Controllers\\LocationController.cs",
               "RelativeDocumentMoniker": "STP.APIService\\Controllers\\LocationController.cs",
@@ -293,25 +347,11 @@
               "RelativeToolTip": "STP.APIService\\Controllers\\LocationController.cs",
               "ViewState": "AgIAAF8AAAAAAAAAAAAAAIEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-28T06:26:13.597Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-28T06:26:13.597Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\appsettings.json",
-              "RelativeDocumentMoniker": "STP.APIService\\appsettings.json",
-              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\appsettings.json",
-              "RelativeToolTip": "STP.APIService\\appsettings.json",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABIAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-10-26T08:28:42.372Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\Back up\\SharingTaxiProject\\STP.APIService\\Program.cs",
               "RelativeDocumentMoniker": "..\\..\\Back up\\SharingTaxiProject\\STP.APIService\\Program.cs",
@@ -323,20 +363,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Program.cs",
-              "RelativeDocumentMoniker": "STP.APIService\\Program.cs",
-              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.APIService\\Program.cs",
-              "RelativeToolTip": "STP.APIService\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJYAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-26T08:31:07.195Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "ProfileController.cs",
               "DocumentMoniker": "C:\\Users\\phucn\\Downloads\\ProfileController.cs",
               "ToolTip": "C:\\Users\\phucn\\Downloads\\ProfileController.cs",
@@ -346,7 +373,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "STP.Repository.csproj",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\STP.Repository.csproj",
               "RelativeDocumentMoniker": "STP.Repository\\STP.Repository.csproj",
@@ -354,12 +381,11 @@
               "RelativeToolTip": "STP.Repository\\STP.Repository.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-10-28T06:40:28.098Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-28T06:40:28.098Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "ShareTaxiContext.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Models\\ShareTaxiContext.cs",
               "RelativeDocumentMoniker": "STP.Repository\\Models\\ShareTaxiContext.cs",
@@ -371,7 +397,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "GenericRepository.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Base\\GenericRepository.cs",
               "RelativeDocumentMoniker": "STP.Repository\\Base\\GenericRepository.cs",
@@ -383,7 +409,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "WalletRepository.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Repository\\WalletRepository.cs",
               "RelativeDocumentMoniker": "STP.Repository\\Repository\\WalletRepository.cs",
@@ -395,7 +421,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Models\\User.cs",
               "RelativeDocumentMoniker": "STP.Repository\\Models\\User.cs",
@@ -407,7 +433,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "Trip.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Models\\Trip.cs",
               "RelativeDocumentMoniker": "STP.Repository\\Models\\Trip.cs",
@@ -419,7 +445,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "Booking.cs",
               "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Models\\Booking.cs",
               "RelativeDocumentMoniker": "STP.Repository\\Models\\Booking.cs",
@@ -428,18 +454,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-24T09:09:48.809Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "TripRepository.cs",
-              "DocumentMoniker": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Repository\\TripRepository.cs",
-              "RelativeDocumentMoniker": "STP.Repository\\Repository\\TripRepository.cs",
-              "ToolTip": "D:\\Share_Taxi\\SWP391-Group-6-Sharing-taxi-BE\\SharingTaxiProject\\STP.Repository\\Repository\\TripRepository.cs",
-              "RelativeToolTip": "STP.Repository\\Repository\\TripRepository.cs",
-              "ViewState": "AgIAAKwAAAAAAAAAAAAiwL4AAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-24T09:09:41.217Z"
             }
           ]
         }

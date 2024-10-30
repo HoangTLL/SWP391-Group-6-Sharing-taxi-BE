@@ -24,23 +24,31 @@ namespace STP.APIService.Controllers
 
         // API nạp tiền vào ví
         [HttpPost("Deposit")]
-        public async Task<IActionResult> Deposit(int walletId, decimal amount, string method)
+        public async Task<IActionResult> Deposit(int userId, decimal amount, string method)
         {
             try
             {
-                // Lấy ví từ database theo walletId
-                var wallet = await _unitOfWork.WalletRepository.GetByIdAsync(walletId);
+                // Lấy người dùng từ database theo userId
+                var user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
+                if (user == null)
+                {
+                    // Trả về lỗi nếu người dùng không tồn tại
+                    return NotFound("User not found.");
+                }
+
+                // Lấy ví của người dùng dựa vào userId
+                var wallet = await _unitOfWork.WalletRepository.GetWalletByUserIdAsync(userId);
                 if (wallet == null)
                 {
                     // Trả về lỗi nếu ví không tồn tại
-                    return NotFound("Wallet not found.");
+                    return NotFound("Wallet not found for this user.");
                 }
 
                 // Tạo một bản ghi Deposit để lưu trữ giao dịch nạp tiền
                 var deposit = new Deposit
                 {
-                    WalletId = walletId,
-                    UserId = wallet.UserId ?? 0,  // Đảm bảo UserId không null
+                    WalletId = wallet.Id,
+                    UserId = userId,  // Sử dụng userId từ tham số
                     Amount = amount,
                     DepositMethod = method,
                     DepositDate = DateTime.Now,
@@ -54,11 +62,11 @@ namespace STP.APIService.Controllers
                 // Sau khi tạo deposit, tạo transaction liên quan đến deposit vừa tạo
                 var transaction = new Transaction
                 {
-                    WalletId = walletId,
+                    WalletId = wallet.Id,
                     Amount = amount,
                     TransactionType = "Deposit", // Loại giao dịch là "Nạp tiền"
                     CreatedAt = DateTime.Now,
-                    ReferenceId = $"Deposit_{walletId}_{DateTime.Now.Ticks}", // Tạo mã tham chiếu
+                    ReferenceId = $"Deposit_{wallet.Id}_{DateTime.Now.Ticks}", // Tạo mã tham chiếu
                     Status = 1,  // Đang xử lý
                     DepositId = deposit.Id // Gán DepositId từ deposit vừa tạo
                 };

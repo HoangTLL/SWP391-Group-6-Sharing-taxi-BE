@@ -35,6 +35,7 @@ namespace STP.Repository
                     t.UnitPrice,
                     t.BookingDate,
                     t.HourInDay,
+                    t.TripTypeId,
                     t.Status
                 })
                 .ToListAsync<object>();

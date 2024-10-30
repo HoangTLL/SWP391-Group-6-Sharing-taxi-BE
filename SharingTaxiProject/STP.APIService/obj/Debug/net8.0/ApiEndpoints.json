@@ -843,7 +843,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "walletId",
+        "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": false
       },
