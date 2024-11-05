@@ -120,6 +120,7 @@ namespace STP.Repository
                     t.UnitPrice,
                     t.BookingDate,
                     t.HourInDay,
+                    t.TripTypeId,
                     t.Status,
                     AvailableSlots = t.MaxPerson - t.Bookings.Count
                 })
@@ -142,6 +143,7 @@ namespace STP.Repository
                     t.UnitPrice,
                     t.BookingDate,
                     t.HourInDay,
+                    t.TripTypeId,
                     t.Status
                 })
                 .ToListAsync<object>();
@@ -191,7 +193,7 @@ namespace STP.Repository
             var participantsPerMonth = await _context.Bookings
             .Include(b => b.Trip)
             .Where(b => b.Trip.BookingDate >= threeMonthsAgo
-                     && b.Trip.Status == 1)  // Chỉ lấy các trip có status = 1
+                     && b.Trip.Status == 3)  // Chỉ lấy các trip có status = 1
             .GroupBy(b => new
             {
                 Year = b.Trip.BookingDate.Value.Year,
@@ -234,7 +236,7 @@ namespace STP.Repository
                     t.UnitPrice,
                     t.BookingDate,
                     t.HourInDay,
-                    t.TripTypeId,
+                    
                     t.Status
                 })
                 .ToListAsync<object>();

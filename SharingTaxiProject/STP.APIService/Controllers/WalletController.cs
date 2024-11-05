@@ -320,7 +320,6 @@ namespace STP.APIService.Controllers
         [HttpPost("RefundTrip")]
         public async Task<IActionResult> RefundTrip(int tripId)
         {
-            // Bắt đầu transaction để đảm bảo nếu có lỗi, tất cả các thay đổi sẽ được rollback
             using var dbTransaction = await _unitOfWork.BeginTransactionAsync();
             try
             {
@@ -330,10 +329,10 @@ namespace STP.APIService.Controllers
                 var trip = await _unitOfWork.TripRepository.GetByIdAsync(tripId);
                 if (trip == null) return NotFound("Không tìm thấy chuyến đi.");
 
-                // Kiểm tra trạng thái của chuyến đi, nếu đã hoàn tất hoặc bị hủy thì không thể hoàn tiền
-                if (trip.Status == 3 || trip.Status == 0)
+                // Kiểm tra trạng thái của chuyến đi, chỉ hoàn tiền khi status = 3
+                if (trip.Status != 3)
                 {
-                    return BadRequest("Chuyến đi đã hoàn tất hoặc bị hủy, không thể hoàn tiền.");
+                    return BadRequest("Chỉ hoàn tiền cho chuyến đi đã hoàn tất (status = 3).");
                 }
 
                 // Kiểm tra nếu đã có giao dịch hoàn tiền trước đó
@@ -356,11 +355,11 @@ namespace STP.APIService.Controllers
                 var (totalCost, pricePerPerson, minPerson, maxPerson) = await _unitOfWork.TripTypePricingRepository.CalculateTripPrice(tripId);
 
                 // Lấy giá UnitPrice từ bảng Trip (nếu có)
-                decimal unitPrice = trip.UnitPrice ?? 0; // UnitPrice lấy từ bảng Trip, nếu null thì mặc định là 0
-                decimal totalActualCost = pricePerPerson * actualParticipants; // Tổng chi phí thực tế
+                decimal unitPrice = trip.UnitPrice ?? 0;
+                decimal totalActualCost = pricePerPerson * actualParticipants;
 
                 // Tính toán số tiền cần hoàn lại
-                decimal totalRefundAmount = unitPrice - totalActualCost;
+                decimal totalRefundAmount = totalActualCost - unitPrice;
                 if (totalRefundAmount <= 0)
                     return BadRequest("Không cần hoàn tiền vì chi phí thực tế cao hơn hoặc bằng số tiền đã thu.");
 
@@ -417,18 +416,20 @@ namespace STP.APIService.Controllers
                     await _unitOfWork.TransactionRepository.UpdateAsync(refundTransaction);
                 }
 
-                // Cập nhật trạng thái chuyến đi sau khi hoàn tiền
-                trip.Status = 3;  // Hoàn tất
-                await _unitOfWork.TripRepository.UpdateAsync(trip);
-
                 await _unitOfWork.SaveAsync();
                 await dbTransaction.CommitAsync();
 
-                return Ok(new { message = "Hoàn tiền thành công cho tất cả người tham gia", refundPerUser });
+                return Ok(new
+                {
+                    message = "Hoàn tiền thành công cho tất cả người tham gia",
+                    tripId = tripId,
+                    totalParticipants = actualParticipants,
+                    refundPerPerson = refundPerUser,
+                    totalRefundAmount = totalRefundAmount
+                });
             }
             catch (Exception ex)
             {
-                // Xử lý lỗi và rollback nếu có ngoại lệ xảy ra
                 await dbTransaction.RollbackAsync();
                 _logger.LogError(ex, $"Error processing refund for TripId: {tripId}");
                 return StatusCode(500, new { message = "Đã xảy ra lỗi trong quá trình hoàn tiền", error = ex.Message });
@@ -498,6 +499,171 @@ namespace STP.APIService.Controllers
                 await transaction.RollbackAsync();
                 _logger.LogError(ex, $"Error processing refund for User {userId} leaving Trip {tripId}");
                 return StatusCode(500, new { message = "An error occurred during the refund process", error = ex.Message });
+            }
+        }
+        [HttpPost("RefundCancelledTrip")]
+        public async Task<IActionResult> RefundCancelledTrip(int tripId)
+        {
+            try
+            {
+                _logger.LogInformation($"Processing refund for cancelled trip ID: {tripId}");
+
+                // Lấy thông tin chuyến đi
+                var trip = await _unitOfWork.TripRepository.GetByIdAsync(tripId);
+                if (trip == null)
+                    return NotFound("Không tìm thấy chuyến đi.");
+
+                // Kiểm tra trạng thái chuyến đi
+                if (trip.Status != 0) // 0 là trạng thái đã hủy
+                    return BadRequest("Chuyến đi chưa bị hủy.");
+
+                // Lấy các booking của chuyến đi có status = 2 (đã thanh toán)
+                var bookings = await _unitOfWork.BookingRepository.GetBookingsByTripIdAsync(tripId);
+                var paidBookings = bookings.Where(b => b.Status == 2).ToList();
+
+                if (!paidBookings.Any())
+                    return NotFound("Không tìm thấy booking nào cần hoàn tiền cho chuyến đi này.");
+
+                // Kiểm tra UnitPrice của trip
+                if (!trip.UnitPrice.HasValue || trip.UnitPrice <= 0)
+                {
+                    return BadRequest("Không tìm thấy thông tin giá vé cần hoàn.");
+                }
+
+                decimal refundAmountPerPerson = trip.UnitPrice.Value;
+                var successfulRefunds = new List<object>();
+                var failedRefunds = new List<object>();
+
+                // Bắt đầu transaction tổng
+                using (var transaction = await _unitOfWork.BeginTransactionAsync())
+                {
+                    try
+                    {
+                        // Xử lý hoàn tiền cho từng booking
+                        foreach (var booking in paidBookings)
+                        {
+                            try
+                            {
+                                // Lấy ví của người dùng
+                                var wallet = await _unitOfWork.WalletRepository.GetWalletByUserIdAsync(booking.UserId ?? 0);
+                                if (wallet == null)
+                                {
+                                    failedRefunds.Add(new
+                                    {
+                                        userId = booking.UserId,
+                                        reason = "Không tìm thấy ví của người dùng"
+                                    });
+                                    continue;
+                                }
+
+                                // Tạo giao dịch hoàn tiền
+                                var refundTransaction = new Transaction
+                                {
+                                    WalletId = wallet.Id,
+                                    Amount = refundAmountPerPerson,
+                                    TransactionType = "Refund",
+                                    CreatedAt = DateTime.Now,
+                                    ReferenceId = $"Refund_CancelledTrip_{tripId}",
+                                    Status = 1,
+                                };
+
+                                await _unitOfWork.TransactionRepository.CreateAsync(refundTransaction);
+
+                                // Cập nhật số dư ví
+                                wallet.Balance += refundAmountPerPerson;
+                                await _unitOfWork.WalletRepository.UpdateAsync(wallet);
+
+                                // Tạo bản ghi deposit
+                                var deposit = new Deposit
+                                {
+                                    WalletId = wallet.Id,
+                                    UserId = wallet.UserId ?? 0,
+                                    Amount = refundAmountPerPerson,
+                                    DepositMethod = "Refund_Cancelled",
+                                    DepositDate = DateTime.Now,
+                                    Status = 1,
+                                    TransactionId = refundTransaction.Id
+                                };
+
+                                await _unitOfWork.DepositRepository.CreateAsync(deposit);
+
+                                // Cập nhật booking status
+                                booking.Status = 3; // 3 là trạng thái đã hoàn tiền
+                                await _unitOfWork.BookingRepository.UpdateAsync(booking);
+
+                                successfulRefunds.Add(new
+                                {
+                                    userId = booking.UserId,
+                                    refundAmount = refundAmountPerPerson,
+                                    newBalance = wallet.Balance
+                                });
+                            }
+                            catch (Exception ex)
+                            {
+                                _logger.LogError(ex, $"Error processing refund for booking ID: {booking.Id}");
+                                failedRefunds.Add(new
+                                {
+                                    userId = booking.UserId,
+                                    reason = ex.Message
+                                });
+                            }
+                        }
+
+                        // Lưu tất cả thay đổi
+                        await _unitOfWork.SaveAsync();
+
+                        // Kiểm tra kết quả xử lý
+                        if (!successfulRefunds.Any())
+                        {
+                            // Nếu không có refund thành công nào, rollback
+                            await transaction.RollbackAsync();
+                            return BadRequest(new
+                            {
+                                message = "Không có giao dịch hoàn tiền nào thành công",
+                                failedRefunds
+                            });
+                        }
+
+                        // Commit transaction nếu có ít nhất một refund thành công
+                        await transaction.CommitAsync();
+
+                        // Chuẩn bị response
+                        var response = new
+                        {
+                            message = "Xử lý hoàn tiền hoàn tất",
+                            tripId,
+                            summary = new
+                            {
+                                totalProcessed = successfulRefunds.Count,
+                                totalFailed = failedRefunds.Count,
+                                totalRefundAmount = successfulRefunds.Count * refundAmountPerPerson,
+                                refundAmountPerPerson
+                            },
+                            successfulRefunds,
+                            failedRefunds
+                        };
+
+                        // Trả về kết quả
+                        if (failedRefunds.Any())
+                            return StatusCode(207, response); // Partial Success
+                        return Ok(response); // All Success
+                    }
+                    catch (Exception ex)
+                    {
+                        // Rollback transaction nếu có lỗi
+                        await transaction.RollbackAsync();
+                        throw; // Throw lại exception để xử lý ở catch block bên ngoài
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error processing refund for trip ID: {tripId}");
+                return StatusCode(500, new
+                {
+                    message = "Đã xảy ra lỗi trong quá trình hoàn tiền",
+                    error = ex.Message
+                });
             }
         }
     }

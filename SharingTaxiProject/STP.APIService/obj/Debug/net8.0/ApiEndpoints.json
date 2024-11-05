@@ -309,17 +309,7 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "STP.Repository.Models.Location",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "STP.APIService.Controllers.LocationController",
@@ -335,8 +325,8 @@
         "IsRequired": true
       },
       {
-        "Name": "location",
-        "Type": "STP.Repository.Models.Location",
+        "Name": "locationUpdateDto",
+        "Type": "STP.APIService.Controllers.LocationUpdateDto",
         "IsRequired": true
       }
     ],
@@ -374,7 +364,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[STP.Repository.Models.Location, STP.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -864,6 +854,22 @@
     "ContainingType": "STP.APIService.Controllers.WalletController",
     "Method": "PayForTrip",
     "RelativePath": "api/Wallet/PayForTrip",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tripId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "STP.APIService.Controllers.WalletController",
+    "Method": "RefundCancelledTrip",
+    "RelativePath": "api/Wallet/RefundCancelledTrip",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

@@ -14,7 +14,7 @@ public partial class Location
     public decimal? Lon { get; set; }
 
     public int? AreaId { get; set; }
-
+    public int? Status { get; set; }
     public virtual Area? Area { get; set; }
 
 
